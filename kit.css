@@ -35,6 +35,8 @@ body {
     background-color: black;
     color: white;
     padding: 10px;
+   /* opacity: 0; 
+    transition: opacity 0.5s ease-in-out; */
   }
   
   nav ul {
@@ -50,14 +52,22 @@ body {
     display: inline-block;
     margin: 0 10px;
   }
-  
+  /*nav:hover {
+    opacity: 1; 
+  }
+  */
   #about{
     /* Add a class name to your about me section */
     line-height: 1; /* Increases line spacing for better readability */
     margin-bottom: 20px; /* Adds some space after the paragraph */
     font-size: 16px; /* Adjust font size as desired */
     color: white; /* Sets a darker text color for better contrast */
+    /*opacity: 0; 
+    transition: opacity 0.5s ease-in-out; */
   }
+  /*#about:hover{
+    opacity: 1; 
+  }*/
  
   nav a {
     text-decoration: none;
@@ -94,4 +104,8 @@ body {
     align-items: flex-end;
     
   }
+  
+.button:hover{
+         color: antiquewhite;
+}
   
