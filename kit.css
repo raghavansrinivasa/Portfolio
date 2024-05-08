@@ -1,3 +1,16 @@
+{
+  scroll-behavior: smooth;
+  animation: fade 1s ease-out 3s;
+}
+@keyframes fade {
+  0%{
+opacity:0;
+  }
+  100%{
+opacity: 1;
+  }
+}
+
 body {
     background-color: black;
     margin: 0;
@@ -40,12 +53,18 @@ body {
   }
   
   nav ul {
+    
+    position: fixed;
     background-color: black;
     list-style: none;
+    top: 20px; /* adjust the top value as needed */
+    left: 50%;
+    transform: translateX(-50%);
     margin: 0;
     padding: 0;
     color: white;
     text-align: center;
+    z-index: 1;
   }
  
   nav li {
