@@ -12,10 +12,10 @@ opacity: 1;
 }
 
 body {
-    background-color: black;
+    background-color: #FECD45;
     margin: 0;
     padding: 0;
-    color: white;
+    color:black;
     /* Added property for footer positioning */
     display: flex;
     min-height: 100vh; /* Ensures viewport height */
@@ -23,7 +23,7 @@ body {
   }
   
   header {
-    background-color:black;
+    background-color:#FECD45;
     padding: 20px;
     text-align: center;
   }
@@ -45,8 +45,8 @@ body {
     margin-right: 10%; 
 }
   nav {
-    background-color: black;
-    color: white;
+    background-color:#FECD45;
+    color: #2568FB;
     padding: 10px;
    /* opacity: 0; 
     transition: opacity 0.5s ease-in-out; */
@@ -55,7 +55,7 @@ body {
   nav ul {
     
     position: fixed;
-    background-color: black;
+    background-color: #FECD45;
     list-style: none;
     top: 20px; /* adjust the top value as needed */
     left: 50%;
@@ -80,7 +80,7 @@ body {
     line-height: 1; /* Increases line spacing for better readability */
     margin-bottom: 20px; /* Adds some space after the paragraph */
     font-size: 16px; /* Adjust font size as desired */
-    color: white; /* Sets a darker text color for better contrast */
+    color:black; /* Sets a darker text color for better contrast */
     /*opacity: 0; 
     transition: opacity 0.5s ease-in-out; */
   }
@@ -90,8 +90,9 @@ body {
  
   nav a {
     text-decoration: none;
-    color: white;
-  }
+    background-color: #FECD45;
+    color: #2568FB;
+   }
   
   main {
     padding: 20px;
@@ -102,7 +103,7 @@ body {
     margin-bottom: 20px;
   }
   h1{
-    color: white;
+    color: #2568FB;
     font-family: Oswald,Sevillana,Poppins,Lato,Roboto, Impact;
     font-weight: 10000px;
     font-size: 1000;
@@ -116,7 +117,7 @@ body {
   .footer {
     text-align: center;
     padding: 10px;
-    background-color: white;
+    background-color: black;
     /* Added properties for centering */
     display: flex;
     justify-content: center;
