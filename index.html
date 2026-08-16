@@ -1,159 +1,243 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth dark">
+<!doctype html>
+<html lang="en" class="js">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAG Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Macondo&display=swap&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = { darkMode: 'class' };
-  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0d0f">
+  <meta name="description" content="Raghavan KS — Technical Support, cybersecurity, infrastructure and systems.">
+  <meta property="og:title" content="Raghavan KS — Systems / Security / Support">
+  <meta property="og:description" content="Technical Support Analyst with experience across enterprise endpoints, identity, infrastructure, security and hybrid environments.">
+  <meta property="og:type" content="website">
+  <title>Raghavan KS — Systems / Security / Support</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Macondo&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-500">
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
 
-  <!-- Floating icons -->
-  <div id="floating-icons" class="fixed top-1/3 left-3 flex flex-col space-y-4 z-50">
-    <img src="user.svg" alt="About" class="icon w-8 h-8 opacity-50">
-    <img src="briefcase.svg" alt="Projects" class="icon w-8 h-8 opacity-50">
-    <img src="camera.svg" alt="Side Projects" class="icon w-8 h-8 opacity-50">
-    <img src="server.svg" alt="Homelab" class="icon w-8 h-8 opacity-50">
-    <img src="mail.svg" alt="Contact" class="icon w-8 h-8 opacity-50">
-  </div>
-
-  <!-- Navbar -->
-  <header class="fixed w-full backdrop-blur-md bg-white/30 dark:bg-gray-900/30 z-50 shadow">
-    <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
-      <h1 class="text-xl font-bold">RAGHAVAN KS</h1>
-      <nav class="space-x-6 hidden md:flex">
-        <a href="#about" class="hover:text-cyan-500">About</a>
-        <a href="#projects" class="hover:text-red-500">Projects</a>
-        <a href="#side-projects" class="hover:text-green-500">Side Projects</a>
-        <a href="#homelab" class="hover:text-purple-500">Homelab</a>
-        <a href="#contact" class="hover:text-blue-500">Contact</a>
-        <a href="https://github.com/raghavansrinivasa" class="hover:text-yellow-500">Github</a>
-        <a href="https://www.linkedin.com/in/iamraghavanks/" class="hover:text-orange-500">LinkedIn</a>
-      </nav>
-      <button id="darkModeToggle" class="ml-4 p-2 rounded bg-gray-200 dark:bg-gray-700">🌙</button>
-    </div>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Raghavan KS home">
+      <span class="brand-mark">R</span>
+      <span>RAAGS<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="#about">01 / Identity</a>
+      <a href="#experience">02 / Experience</a>
+      <a href="#systems">03 / Systems</a>
+      <a href="#work">04 / Work</a>
+      <a href="#contact">05 / Contact</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle colour theme">◐</button>
   </header>
 
-<!-- Hero Section -->
-<section class="h-screen flex flex-col justify-center items-center text-center px-4 bg-gradient-to-r from-gray-800 via-gray-600 to-gray-400 text-white section">
-  <div class="glass-card p-8 rounded-xl flex flex-col items-center">
-    <h1 class="text-5xl md:text-6xl font-bold mb-4 hero-font">
-      <span class="typing">Hi, I’m RAAGS</span>
-    </h1>
-    <p class="text-lg md:text-2xl max-w-2xl mb-6">
-      Cybersecurity professional | Developer | Adventure junkie | Cinematography enthusiast
-    </p>
-  </div>
-</section>
+  <main id="top">
+    <section class="hero section" data-section="hero">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-orbit" aria-hidden="true">
+        <span></span><span></span><span></span>
+        <i></i>
+      </div>
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span class="pulse"></span> SYSTEMS / SECURITY / SUPPORT · MELBOURNE, AU</p>
+        <h1><span>Raghavan</span><em>KS</em></h1>
+        <p class="hero-kicker">TECHNICAL PROBLEM SOLVER.</p>
+        <p class="hero-lede">IT support, infrastructure configuration, cybersecurity and systems troubleshooting across hybrid technology environments.</p>
+        <div class="hero-actions">
+          <a class="button button-primary magnetic" href="#work">Explore the work <span>↘</span></a>
+          <a class="button button-ghost" href="mailto:raghavanks71@gmail.com">Get in touch</a>
+        </div>
+      </div>
+      <aside class="hero-readout reveal delay-2" aria-label="Professional readout">
+        <div class="readout-line"><span>FOCUS</span><b>SECURITY / INFRA</b></div>
+        <div class="readout-line"><span>LEVEL</span><b>L2 · ENTERPRISE</b></div>
+        <div class="readout-line"><span>BASE</span><b>VIC / AU</b></div>
+        <div class="readout-line"><span>STATUS</span><b class="live">AVAILABLE</b></div>
+      </aside>
+      <div class="hero-footer mono">
+        <span>SCROLL TO INSPECT</span>
+        <span>↓</span>
+      </div>
+    </section>
 
-<!-- About Section -->
-<section id="about" class="py-20 px-4 section">
-  <div class="max-w-5xl mx-auto glass-card p-8 rounded-xl">
-    <h2 class="text-3xl font-bold mb-6 flex items-center gap-2">
-      <img src="user.svg" class="w-6 h-6" alt="About"> About Me
-    </h2>
-    <p class="leading-relaxed">
-      I'm Raghavan (RAAGS), a cybersecurity professional with a background in computer science and cybersecurity. I enjoy solving real-world security problems, building applications, and experimenting with homelabs. Outside work, I pursue cinematography and photography as a side hustle.
-    </p>
-  </div>
-</section>
+    <section id="about" class="section editorial" data-section="about">
+      <div class="section-index mono">01</div>
+      <div class="section-heading reveal">
+        <p class="eyebrow">IDENTITY</p>
+        <h2>Technical depth,<br><i>human context.</i></h2>
+      </div>
+      <div class="about-layout">
+        <div class="about-statement reveal">
+          <p>Enthusiastic Technical Support Analyst with 2+ years of experience in providing IT support, root cause analysis, and infrastructure configuration for fast-paced technology environments.</p>
+          <p>Experienced in networking fundamentals, Linux scripting, server configuration, and monitoring dashboards. Known for delivering outstanding customer service and resolving issues efficiently across hybrid environments.</p>
+          <p class="muted">Actively seeking to transition into Level 2-3 responsibilities through continued technical training and mentorship.</p>
+        </div>
+        <div class="metric-stack reveal delay-1">
+          <div><strong>2+</strong><span>years technical support</span></div>
+          <div><strong>200+</strong><span>end users supported at Dispensed</span></div>
+          <div><strong>Top 3%</strong><span>TryHackMe</span></div>
+          <div><strong>M.Cyber</strong><span>Deakin University</span></div>
+        </div>
+      </div>
+    </section>
 
-<!-- Projects Section -->
-<section id="projects" class="py-20 px-4 section">
-  <div class="max-w-6xl mx-auto">
-    <h2 class="text-3xl font-bold mb-6 text-center flex justify-center items-center gap-2">
-      <img src="briefcase.svg" class="w-6 h-6" alt="Projects"> Projects
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="glass-card p-6 aspect-square flex flex-col items-center justify-center text-center">
-        <img src="https://pngimg.com/uploads/github/github_PNG27.png" alt="Project Image" class="mb-4 w-24 h-24 object-cover rounded">
-        <p> Server usage Dashboard with Streamlit</p>
-        <a href="" class="mt-2 text-blue-500 hover:underline">View Project</a>
+    <section id="experience" class="section experience-section" data-section="experience">
+      <div class="section-index mono">02</div>
+      <div class="section-heading reveal">
+        <p class="eyebrow">EXPERIENCE LOG</p>
+        <h2>Where the systems<br><i>meet the people.</i></h2>
       </div>
-      <div class="glass-card p-6 aspect-square flex flex-col items-center justify-center text-center">
-        <img src="https://pngimg.com/uploads/github/github_PNG27.png" alt="Project Image" class="mb-4 w-24 h-24 object-cover rounded">
-        <p>Android App </p>
-        <a href="https://play.google.com/store/apps/details?id=com.raghavanks.sreeramakotienglish&pli=1" class="mt-2 text-blue-500 hover:underline">View on Play Store</a>
-      </div>
-      <div class="glass-card p-6 aspect-square flex flex-col items-center justify-center text-center">
-        <img src="https://pngimg.com/uploads/github/github_PNG27.png" alt="Project Image" class="mb-4 w-24 h-24 object-cover rounded">
-        <p> VibeSecCode 🚀</p>
-        <a href="https://github.com/raghavansrinivasa/VibeCodeSec" class="mt-2 text-blue-500 hover:underline">Click Here</a>
-      </div>
-    </div>
-  </div>
-</section>
+      <div class="timeline">
+        <article class="timeline-item reveal">
+          <div class="timeline-meta mono"><span>12 / 2025 — PRESENT</span><span>ANZ</span></div>
+          <div class="timeline-main">
+            <h3>Desktop Engineer L2</h3><p class="company">Adidas · Swift Computers X HCL</p>
+            <ul>
+              <li>Enterprise endpoint and infrastructure support across retail and corporate environments.</li>
+              <li>Identity and access using Active Directory, including provisioning, deprovisioning and role mirroring.</li>
+              <li>Secure endpoint management with Microsoft Intune across Windows 11 and iOS.</li>
+              <li>Privileged access workflows using Delinea PAM and LAPS-managed credentials.</li>
+              <li>Azure Virtual Desktop, Bomgar, OS imaging, provisioning and network hardware support.</li>
+              <li>ServiceNow incident tracking, vulnerability reduction, backup/recovery and VIP support.</li>
+            </ul>
+          </div>
+        </article>
 
-<!-- Side Projects Section -->
-<section id="side-projects" class="py-20 px-4 section">
-  <div class="max-w-6xl mx-auto">
-    <h2 class="text-3xl font-bold mb-6 text-center flex justify-center items-center gap-2">
-      <img src="camera.svg" class="w-6 h-6" alt="Side Projects"> Side Projects
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="glass-card p-6 aspect-square flex flex-col items-center justify-center text-center">
-        <img src="https://www.freeiconspng.com/uploads/hd-youtube-logo-png-transparent-background-20.png" alt="Side Project" class="mb-4 w-24 h-24 object-cover rounded">
-        <p>Directed and edited a music video with iPhone</p>
-        <a href="https://youtu.be/f8WQb1Cvu9U?si=sgyCSFpqw7lzeZpk" class="mt-2 text-blue-500 hover:underline">click here</a>
-      </div>
-      <div class="glass-card p-6 aspect-square flex flex-col items-center justify-center text-center">
-        <img src="https://www.freeiconspng.com/uploads/hd-youtube-logo-png-transparent-background-20.png" alt="Side Project" class="mb-4 w-24 h-24 object-cover rounded">
-        <p>YouTube channel – Raghvan Vlogs</p>
-        <a href="https://www.youtube.com/@raghvanvlogs" class="mt-2 text-blue-500 hover:underline">click here</a>
-      </div>
-      <div class="glass-card p-6 aspect-square flex flex-col items-center justify-center text-center">
-        <img src="https://www.freeiconspng.com/uploads/hd-youtube-logo-png-transparent-background-20.png" alt="Side Project" class="mb-4 w-24 h-24 object-cover rounded">
-        <p>Photography & Cinematography experiments</p>
-        <a href="https://www.youtube.com/@raghvanvlogs" class="mt-2 text-blue-500 hover:underline">click here</a>
-      </div>
-    </div>
-  </div>
-</section>
+        <article class="timeline-item reveal">
+          <div class="timeline-meta mono"><span>08 / 2025 — 10 / 2025</span><span>AU</span></div>
+          <div class="timeline-main">
+            <h3>Casual Academic Cybersecurity</h3><p class="company">Deakin University</p>
+            <ul>
+              <li>Supported IT networking and cybersecurity courses for ~150 master's students.</li>
+              <li>Marked assignments and provided constructive feedback to ~250 students.</li>
+              <li>Troubleshot technical issues across multiple operating systems and applications.</li>
+            </ul>
+          </div>
+        </article>
 
-<!-- Homelab Section -->
-<section id="homelab" class="py-20 px-4 section">
-  <div class="max-w-6xl mx-auto">
-    <h2 class="text-3xl font-bold mb-6 text-center flex justify-center items-center gap-2">
-      <img src="server.svg" class="w-6 h-6" alt="Homelab"> Homelab
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="glass-card p-6 aspect-square flex flex-col items-center justify-center text-center">
-        <p>Kali Linux, Fedora, Ubuntu virtual environments</p>
-      </div>
-      <div class="glass-card p-6 aspect-square flex flex-col items-center justify-center text-center">
-        <p>Docker containers and security audits</p>
-      </div>
-      <div class="glass-card p-6 aspect-square flex flex-col items-center justify-center text-center">
-        <p>Wazuh Siem</p>
-      </div>
-    </div>
-  </div>
-</section>
+        <article class="timeline-item reveal">
+          <div class="timeline-meta mono"><span>05 / 2024 — 07 / 2025</span><span>AU / NZ / UK</span></div>
+          <div class="timeline-main">
+            <h3>Incident Support Liaison</h3><p class="company">Dispensed</p>
+            <ul>
+              <li>Frontline technical support for clinical IT solutions and VoIP tools.</li>
+              <li>ITIL-aligned incident, problem and request management using Jira Service Management.</li>
+              <li>Supported 200+ end users across desktops, laptops, printers and conferencing peripherals.</li>
+              <li>Root cause analysis, automation/process improvement and configuration/security testing.</li>
+              <li>Supported a Django-based internal SaaS application using Django Admin for user issues, backend errors, permissions, data validation and API token troubleshooting.</li>
+            </ul>
+          </div>
+        </article>
 
-<!-- Contact Section -->
-<section id="contact" class="py-20 px-4 section">
-  <div class="max-w-5xl mx-auto text-center glass-card p-8 rounded-xl">
-    <h2 class="text-3xl font-bold mb-6 flex justify-center items-center gap-2">
-      <img src="mail.svg" class="w-6 h-6" alt="Contact"> Contact
-    </h2>
-    <p>Email: <a href="mailto:raghavanks71@gmail.com" class="text-blue-500">raghavanks71@gmail.com</a></p>
-    <a href="resume.pdf" download class="mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Download Resume</a>
-  </div>
-</section>
+        <article class="timeline-item reveal">
+          <div class="timeline-meta mono"><span>11 / 2022 — 05 / 2024</span><span>SG / AU</span></div>
+          <div class="timeline-main">
+            <h3>System Support Intern</h3><p class="company">Green Been Tech</p>
+            <ul>
+              <li>Frontline support through email, phone and in-person assistance.</li>
+              <li>Windows and Linux server administration, OS patching, configuration and endpoint security.</li>
+              <li>MDM deployment and setup using Jamf and Intune for onboarding and policy compliance.</li>
+              <li>POS peripheral deployment, IT asset inventory and technical documentation.</li>
+            </ul>
+          </div>
+        </article>
 
+        <article class="timeline-item reveal">
+          <div class="timeline-meta mono"><span>10 / 2021 — 01 / 2022</span><span>INDIA</span></div>
+          <div class="timeline-main">
+            <h3>IT Security Intern</h3><p class="company">Bosch</p>
+            <ul>
+              <li>Observed and reviewed secure coding practices and application controls.</li>
+              <li>Executed penetration testing and documented vulnerabilities with remediation guidance.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
 
-  <footer class="py-6 text-center backdrop-blur-md bg-white/30 dark:bg-gray-900/30">
-    <p>© 2025 RAGHAVAN KS</p>
-  </footer>
+    <section id="systems" class="section systems-section" data-section="systems">
+      <div class="section-index mono">03</div>
+      <div class="section-heading reveal">
+        <p class="eyebrow">SYSTEMS / SECURITY</p>
+        <h2>A working map of<br><i>the toolkit.</i></h2>
+      </div>
+      <div class="system-map reveal">
+        <div class="system-line line-a"></div>
+        <div class="system-line line-b"></div>
+        <div class="system-node node-core"><span>CORE</span><strong>RAGHAVAN</strong></div>
+        <div class="system-node node-identity"><span>IDENTITY</span><strong>AD · IAM · MFA</strong></div>
+        <div class="system-node node-endpoint"><span>ENDPOINT</span><strong>INTUNE · LAPS</strong></div>
+        <div class="system-node node-cloud"><span>PLATFORM</span><strong>AVD · AWS IAM</strong></div>
+        <div class="system-node node-security"><span>SECURITY</span><strong>WAZUH · WAF · IDS/IPS</strong></div>
+      </div>
+      <div class="skill-matrix">
+        <div class="skill-group reveal"><span class="mono">01 / SUPPORT</span><p>IT Helpdesk · Service Desk · Ticketing Systems · Remote Support · SaaS Platform Support · Log Analysis · SolarWinds · Looker Studio · SQL · Jamf</p></div>
+        <div class="skill-group reveal delay-1"><span class="mono">02 / SCRIPTING</span><p>Excel · Linux CLI · Bash · Shell · Python · Power Automate · Jira · SQL · Django</p></div>
+        <div class="skill-group reveal delay-2"><span class="mono">03 / PLATFORMS</span><p>Windows · Linux · AWS IAM · Microsoft 365 · Windows 11 · iOS · macOS</p></div>
+        <div class="skill-group reveal"><span class="mono">04 / SECURITY</span><p>MFA · ISO 27001 · HIPAA · GDPR · Penetration Testing · SAT · GoPhish · Safeline WAF · Wazuh</p></div>
+        <div class="skill-group reveal delay-1"><span class="mono">05 / MONITORING</span><p>Custom Dashboards · Platform Alerts · System Logs · Jira Automations · Sentry</p></div>
+        <div class="skill-group reveal delay-2"><span class="mono">06 / PRACTICE</span><p>TryHackMe Top 3% · API Security Fundamentals · ANZ & Mastercard Forage · Preparing for OSCP & CISM · GRC / Vanta</p></div>
+      </div>
+    </section>
+
+    <section id="work" class="section work-section" data-section="work">
+      <div class="section-index mono">04</div>
+      <div class="section-heading reveal">
+        <p class="eyebrow">SELECTED WORK</p>
+        <h2>Not a gallery.<br><i>A technical record.</i></h2>
+      </div>
+      <div class="work-feature reveal">
+        <div class="work-number mono">A / 01</div>
+        <div>
+          <p class="work-label mono">SECURITY PRACTICE</p>
+          <h3>Home lab security stack</h3>
+          <p>Hands-on with Safeline Web application firewall, SIEM (Wazuh), IDS/IPS concepts, encryption practices, and IAM scripting in a home lab environment.</p>
+          <div class="chips"><span>Wazuh</span><span>Safeline WAF</span><span>IAM</span><span>IDS / IPS</span><span>Encryption</span></div>
+        </div>
+        <div class="work-aside mono"><span>MODE</span><strong>HANDS-ON</strong><span>DOMAIN</span><strong>SECURITY</strong></div>
+      </div>
+      <div class="work-note reveal">
+        <span class="mono">PROJECT ARCHIVE</span>
+        <p>The current resume does not list standalone software projects. Rather than invent project claims, this portfolio treats your documented security practice, infrastructure work and professional experience as the primary body of work.</p>
+      </div>
+    </section>
+
+    <section class="section beyond-section" data-section="beyond">
+      <div class="section-index mono">05</div>
+      <div class="beyond-layout">
+        <div class="section-heading reveal">
+          <p class="eyebrow">EDUCATION / CONTINUOUS LEARNING</p>
+          <h2>The engineer<br><i>keeps learning.</i></h2>
+        </div>
+        <div class="education-list">
+          <div class="education-row reveal"><span class="mono">2020 — 2023</span><div><strong>Master of Cybersecurity</strong><small>Deakin University · VIC</small></div></div>
+          <div class="education-row reveal"><span class="mono">2015 — 2019</span><div><strong>Bachelor of Computer Science</strong><small>SRK Institute of Technology · AP</small></div></div>
+          <div class="education-row reveal"><span class="mono">CURRENT</span><div><strong>OSCP & CISM</strong><small>Preparing</small></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-section" data-section="contact">
+      <div class="contact-grid" aria-hidden="true"></div>
+      <div class="section-index mono">06</div>
+      <div class="contact-copy reveal">
+        <p class="eyebrow">OPEN CHANNEL</p>
+        <h2>Let's solve<br><i>something difficult.</i></h2>
+        <p>For technical opportunities, collaboration or a conversation about systems, security and infrastructure.</p>
+        <div class="contact-actions">
+          <a class="button button-primary magnetic" href="mailto:raghavanks71@gmail.com">raghavanks71@gmail.com <span>↗</span></a>
+          <a class="button button-ghost" href="tel:+61466104702">+61 466 104 702</a>
+        </div>
+      </div>
+      <footer class="site-footer mono">
+        <span>RAGHAVAN KS · MELBOURNE, AU</span>
+        <span>© <span id="year"></span> · BUILT WITH HTML / CSS / JS</span>
+      </footer>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>
 </html>
-
-
-
