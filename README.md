@@ -10,7 +10,7 @@ My journey started with a Bachelor’s in Computer Science, followed by an inter
 
 🚀 Developed 5 Android apps and am working on a super-secret project
 
-🔒 Ranked in the Top 4% on TryHackMe
+🔒 Ranked in the Top 3% on TryHackMe
 
 📜 Currently pursuing CISM certification
 
