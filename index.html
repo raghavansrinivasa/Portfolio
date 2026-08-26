@@ -3,241 +3,1570 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b0d0f">
-  <meta name="description" content="Raghavan KS — Technical Support, cybersecurity, infrastructure and systems.">
-  <meta property="og:title" content="Raghavan KS — Systems / Security / Support">
-  <meta property="og:description" content="Technical Support Analyst with experience across enterprise endpoints, identity, infrastructure, security and hybrid environments.">
-  <meta property="og:type" content="website">
-  <title>Raghavan KS — Systems / Security / Support</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Macondo&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+
+  <meta
+    name="theme-color"
+    content="#0b0d0f"
+  >
+
+  <meta
+    name="description"
+    content="Raghavan KS — Technical Support, cybersecurity, infrastructure and systems."
+  >
+
+  <meta
+    property="og:title"
+    content="Raghavan KS — Systems / Security / Support"
+  >
+
+  <meta
+    property="og:description"
+    content="Technical Support Analyst with experience across enterprise endpoints, identity, infrastructure, security and hybrid environments."
+  >
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <title>
+    Raghavan KS — Systems / Security / Support
+  </title>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Macondo&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 </head>
+
 <body>
-  <div class="grain" aria-hidden="true"></div>
-  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <div
+    class="grain"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    class="cursor-glow"
+    aria-hidden="true"
+  ></div>
+
+
+  <!-- ========================================================
+       INTERACTIVE MASCOT
+       ======================================================== -->
+
+  <div
+    class="mascot-system"
+    id="mascotSystem"
+  >
+
+    <div
+      class="mascot-anchor"
+      aria-hidden="true"
+    ></div>
+
+    <div
+      class="mascot-cable"
+      id="mascotCable"
+      aria-hidden="true"
+    >
+      <span></span>
+    </div>
+
+    <button
+      class="mascot"
+      id="mascot"
+      type="button"
+      aria-label="Customise interactive mascot"
+      aria-expanded="false"
+      aria-controls="mascotPanel"
+    >
+
+      <span
+        class="mascot-antenna"
+        aria-hidden="true"
+      ></span>
+
+      <span
+        class="mascot-body"
+        aria-hidden="true"
+      >
+        <span class="mascot-sensor"></span>
+        <span class="mascot-mouth"></span>
+        <span class="mascot-detail"></span>
+      </span>
+
+      <span
+        class="mascot-side"
+        aria-hidden="true"
+      ></span>
+
+    </button>
+
+
+    <!-- Mascot customisation panel -->
+
+    <div
+      class="mascot-panel"
+      id="mascotPanel"
+      hidden
+    >
+
+      <div class="mascot-panel-head">
+
+        <span class="mono">
+          MASCOT SYSTEM
+        </span>
+
+        <span class="mascot-state mono">
+          ONLINE
+        </span>
+
+      </div>
+
+
+      <!-- BODY -->
+
+      <div class="mascot-control">
+
+        <span class="mono">
+          BODY
+        </span>
+
+        <div
+          class="mascot-options"
+          role="radiogroup"
+          aria-label="Mascot body"
+        >
+
+          <button
+            type="button"
+            class="mascot-option is-selected"
+            data-mascot-body="capsule"
+            role="radio"
+            aria-checked="true"
+            aria-label="Capsule body"
+          >
+            ◇
+          </button>
+
+          <button
+            type="button"
+            class="mascot-option"
+            data-mascot-body="orb"
+            role="radio"
+            aria-checked="false"
+            aria-label="Orb body"
+          >
+            ○
+          </button>
+
+          <button
+            type="button"
+            class="mascot-option"
+            data-mascot-body="block"
+            role="radio"
+            aria-checked="false"
+            aria-label="Block body"
+          >
+            ▣
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- SENSOR -->
+
+      <div class="mascot-control">
+
+        <span class="mono">
+          SENSOR
+        </span>
+
+        <div
+          class="mascot-options"
+          role="radiogroup"
+          aria-label="Mascot sensor"
+        >
+
+          <button
+            type="button"
+            class="mascot-option is-selected"
+            data-mascot-sensor="dot"
+            role="radio"
+            aria-checked="true"
+            aria-label="Dot sensor"
+          >
+            •
+          </button>
+
+          <button
+            type="button"
+            class="mascot-option"
+            data-mascot-sensor="radar"
+            role="radio"
+            aria-checked="false"
+            aria-label="Radar sensor"
+          >
+            ◎
+          </button>
+
+          <button
+            type="button"
+            class="mascot-option"
+            data-mascot-sensor="scan"
+            role="radio"
+            aria-checked="false"
+            aria-label="Scanner sensor"
+          >
+            ▰
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- MOOD -->
+
+      <div class="mascot-control">
+
+        <span class="mono">
+          MOOD
+        </span>
+
+        <div
+          class="mascot-options"
+          role="radiogroup"
+          aria-label="Mascot expression"
+        >
+
+          <button
+            type="button"
+            class="mascot-option is-selected"
+            data-mascot-mood="neutral"
+            role="radio"
+            aria-checked="true"
+            aria-label="Neutral expression"
+          >
+            —
+          </button>
+
+          <button
+            type="button"
+            class="mascot-option"
+            data-mascot-mood="curious"
+            role="radio"
+            aria-checked="false"
+            aria-label="Curious expression"
+          >
+            ·
+          </button>
+
+          <button
+            type="button"
+            class="mascot-option"
+            data-mascot-mood="alert"
+            role="radio"
+            aria-checked="false"
+            aria-label="Alert expression"
+          >
+            ›
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- ACCESSORY -->
+
+      <div class="mascot-control">
+
+        <span class="mono">
+          ACCESSORY
+        </span>
+
+        <div
+          class="mascot-options"
+          role="radiogroup"
+          aria-label="Mascot accessory"
+        >
+
+          <button
+            type="button"
+            class="mascot-option is-selected"
+            data-mascot-accessory="antenna"
+            role="radio"
+            aria-checked="true"
+            aria-label="Antenna accessory"
+          >
+            ⌁
+          </button>
+
+          <button
+            type="button"
+            class="mascot-option"
+            data-mascot-accessory="module"
+            role="radio"
+            aria-checked="false"
+            aria-label="Side module accessory"
+          >
+            ╱
+          </button>
+
+          <button
+            type="button"
+            class="mascot-option"
+            data-mascot-accessory="none"
+            role="radio"
+            aria-checked="false"
+            aria-label="No accessory"
+          >
+            ×
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- ELASTICITY -->
+
+      <div class="mascot-slider">
+
+        <div>
+
+          <span class="mono">
+            ELASTICITY
+          </span>
+
+          <output
+            id="mascotElasticityValue"
+          >
+            DEFAULT
+          </output>
+
+        </div>
+
+        <input
+          id="mascotElasticity"
+          type="range"
+          min="1"
+          max="3"
+          step="1"
+          value="2"
+          aria-label="Mascot elasticity"
+        >
+
+      </div>
+
+
+      <!-- SIZE -->
+
+      <div class="mascot-slider">
+
+        <div>
+
+          <span class="mono">
+            SIZE
+          </span>
+
+          <output
+            id="mascotScaleValue"
+          >
+            DEFAULT
+          </output>
+
+        </div>
+
+        <input
+          id="mascotScale"
+          type="range"
+          min="1"
+          max="3"
+          step="1"
+          value="2"
+          aria-label="Mascot size"
+        >
+
+      </div>
+
+
+      <button
+        class="mascot-reset mono"
+        id="mascotReset"
+        type="button"
+      >
+        RESET MASCOT
+      </button>
+
+
+      <p class="mascot-panel-note">
+        Drag the mascot. Release to let the system settle.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================================
+       HEADER
+       ======================================================== -->
 
   <header class="site-header">
-    <a class="brand" href="#top" aria-label="Raghavan KS home">
-      <span class="brand-mark">R</span>
-      <span>RAAGS<span class="brand-dot">.</span></span>
+
+    <a
+      class="brand"
+      href="#top"
+      aria-label="Raghavan KS home"
+    >
+
+      <span class="brand-mark">
+        R
+      </span>
+
+      <span>
+        RAAGS<span class="brand-dot">.</span>
+      </span>
+
     </a>
-    <nav class="desktop-nav" aria-label="Primary navigation">
-      <a href="#about">01 / Identity</a>
-      <a href="#experience">02 / Experience</a>
-      <a href="#systems">03 / Systems</a>
-      <a href="#work">04 / Work</a>
-      <a href="#contact">05 / Contact</a>
+
+
+    <nav
+      class="desktop-nav"
+      aria-label="Primary navigation"
+    >
+
+      <a href="#about">
+        01 / Identity
+      </a>
+
+      <a href="#experience">
+        02 / Experience
+      </a>
+
+      <a href="#systems">
+        03 / Systems
+      </a>
+
+      <a href="#work">
+        04 / Work
+      </a>
+
+      <a href="#contact">
+        05 / Contact
+      </a>
+
     </nav>
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle colour theme">◐</button>
+
+
+    <!-- Colour system -->
+
+    <div class="theme-control">
+
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="Open colour system"
+        aria-expanded="false"
+        aria-controls="themePanel"
+      >
+        ◐
+      </button>
+
+
+      <div
+        class="theme-panel"
+        id="themePanel"
+        hidden
+      >
+
+        <div class="theme-panel-head">
+
+          <span class="mono">
+            COLOUR SYSTEM
+          </span>
+
+          <span class="theme-panel-rule">
+            80 / 10 / 10
+          </span>
+
+        </div>
+
+
+        <div
+          class="theme-options"
+          role="radiogroup"
+          aria-label="Colour schemes"
+        >
+
+          <button
+            class="theme-option is-selected"
+            type="button"
+            data-theme-option="signal"
+            role="radio"
+            aria-checked="true"
+          >
+
+            <span
+              class="theme-swatch theme-swatch-signal"
+              aria-hidden="true"
+            ></span>
+
+            <span>
+              <strong>SIGNAL</strong>
+              <small>Mint / graphite</small>
+            </span>
+
+          </button>
+
+
+          <button
+            class="theme-option"
+            type="button"
+            data-theme-option="amber"
+            role="radio"
+            aria-checked="false"
+          >
+
+            <span
+              class="theme-swatch theme-swatch-amber"
+              aria-hidden="true"
+            ></span>
+
+            <span>
+              <strong>AMBER</strong>
+              <small>Gold / charcoal</small>
+            </span>
+
+          </button>
+
+
+          <button
+            class="theme-option"
+            type="button"
+            data-theme-option="violet"
+            role="radio"
+            aria-checked="false"
+          >
+
+            <span
+              class="theme-swatch theme-swatch-violet"
+              aria-hidden="true"
+            ></span>
+
+            <span>
+              <strong>VIOLET</strong>
+              <small>Violet / ink</small>
+            </span>
+
+          </button>
+
+
+          <button
+            class="theme-option"
+            type="button"
+            data-theme-option="ice"
+            role="radio"
+            aria-checked="false"
+          >
+
+            <span
+              class="theme-swatch theme-swatch-ice"
+              aria-hidden="true"
+            ></span>
+
+            <span>
+              <strong>ICE</strong>
+              <small>Blue / slate</small>
+            </span>
+
+          </button>
+
+
+          <button
+            class="theme-option"
+            type="button"
+            data-theme-option="ember"
+            role="radio"
+            aria-checked="false"
+          >
+
+            <span
+              class="theme-swatch theme-swatch-ember"
+              aria-hidden="true"
+            ></span>
+
+            <span>
+              <strong>EMBER</strong>
+              <small>Coral / graphite</small>
+            </span>
+
+          </button>
+
+        </div>
+
+
+        <p class="theme-panel-note">
+          Curated palettes. Contrast and hierarchy stay intact.
+        </p>
+
+      </div>
+
+    </div>
+
   </header>
 
+
+  <!-- ========================================================
+       MAIN
+       ======================================================== -->
+
   <main id="top">
-    <section class="hero section" data-section="hero">
-      <div class="hero-grid" aria-hidden="true"></div>
-      <div class="hero-orbit" aria-hidden="true">
-        <span></span><span></span><span></span>
+
+
+    <!-- HERO -->
+
+    <section
+      class="hero section"
+      data-section="hero"
+    >
+
+      <div
+        class="hero-grid"
+        aria-hidden="true"
+      ></div>
+
+      <div
+        class="hero-orbit"
+        aria-hidden="true"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
         <i></i>
       </div>
+
+
       <div class="hero-copy reveal">
-        <p class="eyebrow"><span class="pulse"></span> SYSTEMS / SECURITY / SUPPORT · MELBOURNE, AU</p>
-        <h1><span>Raghavan</span><em>KS</em></h1>
-        <p class="hero-kicker">TECHNICAL PROBLEM SOLVER.</p>
-        <p class="hero-lede">IT support, infrastructure configuration, cybersecurity and systems troubleshooting across hybrid technology environments.</p>
+
+        <p class="eyebrow">
+          <span class="pulse"></span>
+          SYSTEMS / SECURITY / SUPPORT
+        </p>
+
+        <p class="hero-kicker">
+          RAGHAVAN KS · MELBOURNE, AU
+        </p>
+
+        <h1>
+          <span>Technical</span>
+          <em>problem solver.</em>
+        </h1>
+
+        <p class="hero-lede">
+          IT support, infrastructure configuration,
+          cybersecurity and systems troubleshooting
+          across hybrid technology environments.
+        </p>
+
+
         <div class="hero-actions">
-          <a class="button button-primary magnetic" href="#work">Explore the work <span>↘</span></a>
-          <a class="button button-ghost" href="mailto:raghavanks71@gmail.com">Get in touch</a>
+
+          <a
+            class="button button-primary magnetic"
+            href="#work"
+          >
+            Explore the work
+            <span>↘</span>
+          </a>
+
+          <a
+            class="button button-ghost"
+            href="mailto:raghavanks71@gmail.com"
+          >
+            Get in touch
+          </a>
+
         </div>
+
       </div>
-      <aside class="hero-readout reveal delay-2" aria-label="Professional readout">
-        <div class="readout-line"><span>FOCUS</span><b>SECURITY / INFRA</b></div>
-        <div class="readout-line"><span>LEVEL</span><b>L2 · ENTERPRISE</b></div>
-        <div class="readout-line"><span>BASE</span><b>VIC / AU</b></div>
-        <div class="readout-line"><span>STATUS</span><b class="live">AVAILABLE</b></div>
+
+
+      <aside
+        class="hero-readout reveal delay-2"
+        aria-label="Professional readout"
+      >
+
+        <div class="readout-line">
+          <span>FOCUS</span>
+          <b>SECURITY / INFRA</b>
+        </div>
+
+        <div class="readout-line">
+          <span>LEVEL</span>
+          <b>L2 · ENTERPRISE</b>
+        </div>
+
+        <div class="readout-line">
+          <span>BASE</span>
+          <b>VIC / AU</b>
+        </div>
+
+        <div class="readout-line">
+          <span>STATUS</span>
+          <b class="live">AVAILABLE</b>
+        </div>
+
       </aside>
+
+
       <div class="hero-footer mono">
-        <span>SCROLL TO INSPECT</span>
-        <span>↓</span>
+
+        <span>
+          SCROLL TO INSPECT
+        </span>
+
+        <span>
+          ↓
+        </span>
+
       </div>
+
     </section>
 
-    <section id="about" class="section editorial" data-section="about">
-      <div class="section-index mono">01</div>
-      <div class="section-heading reveal">
-        <p class="eyebrow">IDENTITY</p>
-        <h2>Technical depth,<br><i>human context.</i></h2>
+
+    <!-- ABOUT -->
+
+    <section
+      id="about"
+      class="section editorial"
+      data-section="about"
+    >
+
+      <div class="section-index mono">
+        01
       </div>
+
+
+      <div class="section-heading reveal">
+
+        <p class="eyebrow">
+          IDENTITY
+        </p>
+
+        <h2>
+          Technical depth,<br>
+          <i>human context.</i>
+        </h2>
+
+      </div>
+
+
       <div class="about-layout">
+
         <div class="about-statement reveal">
-          <p>Enthusiastic Technical Support Analyst with 3+ years of experience in providing IT support, root cause analysis, and infrastructure configuration for fast-paced technology environments.</p>
-          <p>Experienced in networking fundamentals, Linux scripting, server configuration, and monitoring dashboards. Known for delivering outstanding customer service and resolving issues efficiently across hybrid environments.</p>
-          <p class="muted">Actively seeking to transition into Level 2-3 responsibilities through continued technical training and mentorship.</p>
+
+          <p>
+            Enthusiastic Technical Support Analyst
+            with 3+ years of experience in providing
+            IT support, root cause analysis, and
+            infrastructure configuration for
+            fast-paced technology environments.
+          </p>
+
+          <p>
+            Experienced in networking fundamentals,
+            Linux scripting, server configuration,
+            and monitoring dashboards. Known for
+            delivering outstanding customer service
+            and resolving issues efficiently across
+            hybrid environments.
+          </p>
+
+          <p class="muted">
+            Actively seeking to transition into
+            Level 2-3 responsibilities through
+            continued technical training and
+            mentorship.
+          </p>
+
         </div>
+
+
         <div class="metric-stack reveal delay-1">
-          <div><strong>3+</strong><span>years technical support</span></div>
-          <div><strong>200+</strong><span>end users supported at Dispensed</span></div>
-          <div><strong>Top 3%</strong><span>TryHackMe</span></div>
-          <div><strong>M.Cyber</strong><span>Deakin University</span></div>
+
+          <div>
+            <strong>3+</strong>
+            <span>
+              years technical support
+            </span>
+          </div>
+
+          <div>
+            <strong>200+</strong>
+            <span>
+              end users supported at Dispensed
+            </span>
+          </div>
+
+          <div>
+            <strong>Top 3%</strong>
+            <span>
+              TryHackMe
+            </span>
+          </div>
+
+          <div>
+            <strong>M.Cyber</strong>
+            <span>
+              Deakin University
+            </span>
+          </div>
+
         </div>
+
       </div>
+
     </section>
 
-    <section id="experience" class="section experience-section" data-section="experience">
-      <div class="section-index mono">02</div>
-      <div class="section-heading reveal">
-        <p class="eyebrow">EXPERIENCE LOG</p>
-        <h2>Where the systems<br><i>meet the people.</i></h2>
+
+    <!-- EXPERIENCE -->
+
+    <section
+      id="experience"
+      class="section experience-section"
+      data-section="experience"
+    >
+
+      <div class="section-index mono">
+        02
       </div>
+
+
+      <div class="section-heading reveal">
+
+        <p class="eyebrow">
+          EXPERIENCE LOG
+        </p>
+
+        <h2>
+          Where the systems<br>
+          <i>meet the people.</i>
+        </h2>
+
+      </div>
+
+
       <div class="timeline">
-        <article class="timeline-item reveal">
-          <div class="timeline-meta mono"><span>12 / 2025 — PRESENT</span><span>ANZ</span></div>
-          <div class="timeline-main">
-            <h3>Desktop Engineer L2</h3><p class="company">Adidas · Swift Computers X HCL</p>
-            <ul>
-              <li>Enterprise endpoint and infrastructure support across retail and corporate environments.</li>
-              <li>Identity and access using Active Directory, including provisioning, deprovisioning and role mirroring.</li>
-              <li>Secure endpoint management with Microsoft Intune across Windows 11 and iOS.</li>
-              <li>Privileged access workflows using Delinea PAM and LAPS-managed credentials.</li>
-              <li>Azure Virtual Desktop, Bomgar, OS imaging, provisioning and network hardware support.</li>
-              <li>ServiceNow incident tracking, vulnerability reduction, backup/recovery and VIP support.</li>
-            </ul>
-          </div>
-        </article>
+
 
         <article class="timeline-item reveal">
-          <div class="timeline-meta mono"><span>08 / 2025 — 10 / 2025</span><span>AU</span></div>
-          <div class="timeline-main">
-            <h3>Casual Academic Cybersecurity</h3><p class="company">Deakin University</p>
-            <ul>
-              <li>Supported IT networking and cybersecurity courses for ~150 master's students.</li>
-              <li>Marked assignments and provided constructive feedback to ~250 students.</li>
-              <li>Troubleshot technical issues across multiple operating systems and applications.</li>
-            </ul>
+
+          <div class="timeline-meta mono">
+
+            <span>
+              12 / 2025 — PRESENT
+            </span>
+
+            <span>
+              ANZ
+            </span>
+
           </div>
+
+
+          <div class="timeline-main">
+
+            <h3>
+              Desktop Engineer L2
+            </h3>
+
+            <p class="company">
+              Adidas · Swift Computers X HCL
+            </p>
+
+            <ul>
+
+              <li>
+                Enterprise endpoint and infrastructure
+                support across retail and corporate
+                environments.
+              </li>
+
+              <li>
+                Identity and access using Active
+                Directory, including provisioning,
+                deprovisioning and role mirroring.
+              </li>
+
+              <li>
+                Secure endpoint management with
+                Microsoft Intune across Windows 11
+                and iOS.
+              </li>
+
+              <li>
+                Privileged access workflows using
+                Delinea PAM and LAPS-managed
+                credentials.
+              </li>
+
+              <li>
+                Azure Virtual Desktop, Bomgar,
+                OS imaging, provisioning and
+                network hardware support.
+              </li>
+
+              <li>
+                ServiceNow incident tracking,
+                vulnerability reduction,
+                backup/recovery and VIP support.
+              </li>
+
+            </ul>
+
+          </div>
+
         </article>
 
-        <article class="timeline-item reveal">
-          <div class="timeline-meta mono"><span>05 / 2024 — 07 / 2025</span><span>AU / NZ / UK</span></div>
-          <div class="timeline-main">
-            <h3>Incident Support Liaison</h3><p class="company">Dispensed</p>
-            <ul>
-              <li>Frontline technical support for clinical IT solutions and VoIP tools.</li>
-              <li>ITIL-aligned incident, problem and request management using Jira Service Management.</li>
-              <li>Supported 200+ end users across desktops, laptops, printers and conferencing peripherals.</li>
-              <li>Root cause analysis, automation/process improvement and configuration/security testing.</li>
-              <li>Supported a Django-based internal SaaS application using Django Admin for user issues, backend errors, permissions, data validation and API token troubleshooting.</li>
-            </ul>
-          </div>
-        </article>
 
         <article class="timeline-item reveal">
-          <div class="timeline-meta mono"><span>11 / 2022 — 05 / 2024</span><span>SG / AU</span></div>
-          <div class="timeline-main">
-            <h3>System Support Intern</h3><p class="company">Green Been Tech</p>
-            <ul>
-              <li>Frontline support through email, phone and in-person assistance.</li>
-              <li>Windows and Linux server administration, OS patching, configuration and endpoint security.</li>
-              <li>MDM deployment and setup using Jamf and Intune for onboarding and policy compliance.</li>
-              <li>POS peripheral deployment, IT asset inventory and technical documentation.</li>
-            </ul>
+
+          <div class="timeline-meta mono">
+
+            <span>
+              08 / 2025 — 10 / 2025
+            </span>
+
+            <span>
+              AU
+            </span>
+
           </div>
+
+
+          <div class="timeline-main">
+
+            <h3>
+              Casual Academic Cybersecurity
+            </h3>
+
+            <p class="company">
+              Deakin University
+            </p>
+
+            <ul>
+
+              <li>
+                Supported IT networking and
+                cybersecurity courses for ~150
+                master's students.
+              </li>
+
+              <li>
+                Marked assignments and provided
+                constructive feedback to ~250
+                students.
+              </li>
+
+              <li>
+                Troubleshot technical issues across
+                multiple operating systems and
+                applications.
+              </li>
+
+            </ul>
+
+          </div>
+
         </article>
 
+
         <article class="timeline-item reveal">
-          <div class="timeline-meta mono"><span>10 / 2021 — 01 / 2022</span><span>INDIA</span></div>
-          <div class="timeline-main">
-            <h3>IT Security Intern</h3><p class="company">Bosch</p>
-            <ul>
-              <li>Observed and reviewed secure coding practices and application controls.</li>
-              <li>Executed penetration testing and documented vulnerabilities with remediation guidance.</li>
-            </ul>
+
+          <div class="timeline-meta mono">
+
+            <span>
+              05 / 2024 — 07 / 2025
+            </span>
+
+            <span>
+              AU / NZ / UK
+            </span>
+
           </div>
+
+
+          <div class="timeline-main">
+
+            <h3>
+              Incident Support Liaison
+            </h3>
+
+            <p class="company">
+              Dispensed
+            </p>
+
+            <ul>
+
+              <li>
+                Frontline technical support for
+                clinical IT solutions and VoIP tools.
+              </li>
+
+              <li>
+                ITIL-aligned incident, problem and
+                request management using Jira Service
+                Management.
+              </li>
+
+              <li>
+                Supported 200+ end users across
+                desktops, laptops, printers and
+                conferencing peripherals.
+              </li>
+
+              <li>
+                Root cause analysis,
+                automation/process improvement
+                and configuration/security testing.
+              </li>
+
+              <li>
+                Supported a Django-based internal
+                SaaS application using Django Admin
+                for user issues, backend errors,
+                permissions, data validation and
+                API token troubleshooting.
+              </li>
+
+            </ul>
+
+          </div>
+
         </article>
+
+
+        <article class="timeline-item reveal">
+
+          <div class="timeline-meta mono">
+
+            <span>
+              11 / 2022 — 05 / 2024
+            </span>
+
+            <span>
+              SG / AU
+            </span>
+
+          </div>
+
+
+          <div class="timeline-main">
+
+            <h3>
+              System Support Intern
+            </h3>
+
+            <p class="company">
+              Green Been Tech
+            </p>
+
+            <ul>
+
+              <li>
+                Frontline support through email,
+                phone and in-person assistance.
+              </li>
+
+              <li>
+                Windows and Linux server
+                administration, OS patching,
+                configuration and endpoint security.
+              </li>
+
+              <li>
+                MDM deployment and setup using Jamf
+                and Intune for onboarding and policy
+                compliance.
+              </li>
+
+              <li>
+                POS peripheral deployment, IT asset
+                inventory and technical documentation.
+              </li>
+
+            </ul>
+
+          </div>
+
+        </article>
+
+
+        <article class="timeline-item reveal">
+
+          <div class="timeline-meta mono">
+
+            <span>
+              10 / 2021 — 01 / 2022
+            </span>
+
+            <span>
+              INDIA
+            </span>
+
+          </div>
+
+
+          <div class="timeline-main">
+
+            <h3>
+              IT Security Intern
+            </h3>
+
+            <p class="company">
+              Bosch
+            </p>
+
+            <ul>
+
+              <li>
+                Observed and reviewed secure coding
+                practices and application controls.
+              </li>
+
+              <li>
+                Executed penetration testing and
+                documented vulnerabilities with
+                remediation guidance.
+              </li>
+
+            </ul>
+
+          </div>
+
+        </article>
+
       </div>
+
     </section>
 
-    <section id="systems" class="section systems-section" data-section="systems">
-      <div class="section-index mono">03</div>
-      <div class="section-heading reveal">
-        <p class="eyebrow">SYSTEMS / SECURITY</p>
-        <h2>A working map of<br><i>the toolkit.</i></h2>
+
+    <!-- SYSTEMS -->
+
+    <section
+      id="systems"
+      class="section systems-section"
+      data-section="systems"
+    >
+
+      <div class="section-index mono">
+        03
       </div>
+
+
+      <div class="section-heading reveal">
+
+        <p class="eyebrow">
+          SYSTEMS / SECURITY
+        </p>
+
+        <h2>
+          A working map of<br>
+          <i>the toolkit.</i>
+        </h2>
+
+      </div>
+
+
       <div class="system-map reveal">
+
         <div class="system-line line-a"></div>
         <div class="system-line line-b"></div>
-        <div class="system-node node-core"><span>CORE</span><strong>RAGHAVAN</strong></div>
-        <div class="system-node node-identity"><span>IDENTITY</span><strong>AD · IAM · MFA</strong></div>
-        <div class="system-node node-endpoint"><span>ENDPOINT</span><strong>INTUNE · LAPS</strong></div>
-        <div class="system-node node-cloud"><span>PLATFORM</span><strong>AVD · AWS IAM</strong></div>
-        <div class="system-node node-security"><span>SECURITY</span><strong>WAZUH · WAF · IDS/IPS</strong></div>
+
+        <div class="system-node node-core">
+          <span>CORE</span>
+          <strong>RAGHAVAN</strong>
+        </div>
+
+        <div class="system-node node-identity">
+          <span>IDENTITY</span>
+          <strong>AD · IAM · MFA</strong>
+        </div>
+
+        <div class="system-node node-endpoint">
+          <span>ENDPOINT</span>
+          <strong>INTUNE · LAPS</strong>
+        </div>
+
+        <div class="system-node node-cloud">
+          <span>PLATFORM</span>
+          <strong>AVD · AWS IAM</strong>
+        </div>
+
+        <div class="system-node node-security">
+          <span>SECURITY</span>
+          <strong>WAZUH · WAF · IDS/IPS</strong>
+        </div>
+
       </div>
+
+
       <div class="skill-matrix">
-        <div class="skill-group reveal"><span class="mono">01 / SUPPORT</span><p>IT Helpdesk · Service Desk · Ticketing Systems · Remote Support · SaaS Platform Support · Log Analysis · SolarWinds · Looker Studio · SQL · Jamf</p></div>
-        <div class="skill-group reveal delay-1"><span class="mono">02 / SCRIPTING</span><p>Excel · Linux CLI · Bash · Shell · Python · Power Automate · Jira · SQL · Django</p></div>
-        <div class="skill-group reveal delay-2"><span class="mono">03 / PLATFORMS</span><p>Windows · Linux · AWS IAM · Microsoft 365 · Windows 11 · iOS · macOS</p></div>
-        <div class="skill-group reveal"><span class="mono">04 / SECURITY</span><p>MFA · ISO 27001 · HIPAA · GDPR · Penetration Testing · SAT · GoPhish · Safeline WAF · Wazuh</p></div>
-        <div class="skill-group reveal delay-1"><span class="mono">05 / MONITORING</span><p>Custom Dashboards · Platform Alerts · System Logs · Jira Automations · Sentry</p></div>
-        <div class="skill-group reveal delay-2"><span class="mono">06 / PRACTICE</span><p>TryHackMe Top 3% · API Security Fundamentals · ANZ & Mastercard Forage · Preparing for OSCP & CISM · GRC / Vanta</p></div>
+
+        <div class="skill-group reveal">
+          <span class="mono">01 / SUPPORT</span>
+          <p>
+            IT Helpdesk · Service Desk · Ticketing
+            Systems · Remote Support · SaaS Platform
+            Support · Log Analysis · SolarWinds ·
+            Looker Studio · SQL · Jamf
+          </p>
+        </div>
+
+        <div class="skill-group reveal delay-1">
+          <span class="mono">02 / SCRIPTING</span>
+          <p>
+            Excel · Linux CLI · Bash · Shell · Python ·
+            Power Automate · Jira · SQL · Django
+          </p>
+        </div>
+
+        <div class="skill-group reveal delay-2">
+          <span class="mono">03 / PLATFORMS</span>
+          <p>
+            Windows · Linux · AWS IAM · Microsoft 365 ·
+            Windows 11 · iOS · macOS
+          </p>
+        </div>
+
+        <div class="skill-group reveal">
+          <span class="mono">04 / SECURITY</span>
+          <p>
+            MFA · ISO 27001 · HIPAA · GDPR ·
+            Penetration Testing · SAT · GoPhish ·
+            Safeline WAF · Wazuh
+          </p>
+        </div>
+
+        <div class="skill-group reveal delay-1">
+          <span class="mono">05 / MONITORING</span>
+          <p>
+            Custom Dashboards · Platform Alerts ·
+            System Logs · Jira Automations · Sentry
+          </p>
+        </div>
+
+        <div class="skill-group reveal delay-2">
+          <span class="mono">06 / PRACTICE</span>
+          <p>
+            TryHackMe Top 3% · API Security Fundamentals ·
+            ANZ & Mastercard Forage · Preparing for
+            OSCP & CISM · GRC / Vanta
+          </p>
+        </div>
+
       </div>
+
     </section>
 
-    <section id="work" class="section work-section" data-section="work">
-      <div class="section-index mono">04</div>
+
+    <!-- WORK -->
+
+    <section
+      id="work"
+      class="section work-section"
+      data-section="work"
+    >
+
+      <div class="section-index mono">
+        04
+      </div>
+
+
       <div class="section-heading reveal">
-        <p class="eyebrow">SELECTED WORK</p>
-        <h2>Not a gallery.<br><i>A technical record.</i></h2>
+
+        <p class="eyebrow">
+          SELECTED WORK
+        </p>
+
+        <h2>
+          Not a gallery.<br>
+          <i>A technical record.</i>
+        </h2>
+
       </div>
+
+
       <div class="work-feature reveal">
-        <div class="work-number mono">A / 01</div>
+
+        <div class="work-number mono">
+          A / 01
+        </div>
+
         <div>
-          <p class="work-label mono">SECURITY PRACTICE</p>
-          <h3>Home lab security stack</h3>
-          <p>Hands-on with Safeline Web application firewall, SIEM (Wazuh), IDS/IPS concepts, encryption practices, and IAM scripting in a home lab environment.</p>
-          <div class="chips"><span>Wazuh</span><span>Safeline WAF</span><span>IAM</span><span>IDS / IPS</span><span>Encryption</span></div>
+
+          <p class="work-label mono">
+            SECURITY PRACTICE
+          </p>
+
+          <h3>
+            Home lab security stack
+          </h3>
+
+          <p>
+            Hands-on with Safeline Web application
+            firewall, SIEM (Wazuh), IDS/IPS concepts,
+            encryption practices, and IAM scripting
+            in a home lab environment.
+          </p>
+
+          <div class="chips">
+
+            <span>Wazuh</span>
+            <span>Safeline WAF</span>
+            <span>IAM</span>
+            <span>IDS / IPS</span>
+            <span>Encryption</span>
+
+          </div>
+
         </div>
-        <div class="work-aside mono"><span>MODE</span><strong>HANDS-ON</strong><span>DOMAIN</span><strong>SECURITY</strong></div>
+
+
+        <div class="work-aside mono">
+
+          <span>MODE</span>
+          <strong>HANDS-ON</strong>
+
+          <span>DOMAIN</span>
+          <strong>SECURITY</strong>
+
+        </div>
+
       </div>
+
+
       <div class="work-note reveal">
-        <span class="mono">PROJECT ARCHIVE</span>
-        <p>The current resume does not list standalone software projects. Rather than invent project claims, this portfolio treats your documented security practice, infrastructure work and professional experience as the primary body of work.</p>
+
+        <span class="mono">
+          PROJECT ARCHIVE
+        </span>
+
+        <p>
+          The current resume does not list standalone
+          software projects. Rather than invent project
+          claims, this portfolio treats your documented
+          security practice, infrastructure work and
+          professional experience as the primary body
+          of work.
+        </p>
+
       </div>
+
     </section>
 
-    <section class="section beyond-section" data-section="beyond">
-      <div class="section-index mono">05</div>
+
+    <!-- EDUCATION -->
+
+    <section
+      class="section beyond-section"
+      data-section="beyond"
+    >
+
+      <div class="section-index mono">
+        05
+      </div>
+
+
       <div class="beyond-layout">
+
         <div class="section-heading reveal">
-          <p class="eyebrow">EDUCATION / CONTINUOUS LEARNING</p>
-          <h2>The engineer<br><i>keeps learning.</i></h2>
+
+          <p class="eyebrow">
+            EDUCATION / CONTINUOUS LEARNING
+          </p>
+
+          <h2>
+            The engineer<br>
+            <i>keeps learning.</i>
+          </h2>
+
         </div>
+
+
         <div class="education-list">
-          <div class="education-row reveal"><span class="mono">2020 — 2023</span><div><strong>Master of Cybersecurity</strong><small>Deakin University · VIC</small></div></div>
-          <div class="education-row reveal"><span class="mono">2015 — 2019</span><div><strong>Bachelor of Computer Science</strong><small>SRK Institute of Technology · AP</small></div></div>
-          <div class="education-row reveal"><span class="mono">CURRENT</span><div><strong>OSCP & CISM</strong><small>Preparing</small></div></div>
+
+          <div class="education-row reveal">
+
+            <span class="mono">
+              2020 — 2023
+            </span>
+
+            <div>
+
+              <strong>
+                Master of Cybersecurity
+              </strong>
+
+              <small>
+                Deakin University · VIC
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <div class="education-row reveal">
+
+            <span class="mono">
+              2015 — 2019
+            </span>
+
+            <div>
+
+              <strong>
+                Bachelor of Computer Science
+              </strong>
+
+              <small>
+                SRK Institute of Technology · AP
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <div class="education-row reveal">
+
+            <span class="mono">
+              CURRENT
+            </span>
+
+            <div>
+
+              <strong>
+                OSCP & CISM
+              </strong>
+
+              <small>
+                Preparing
+              </small>
+
+            </div>
+
+          </div>
+
         </div>
+
       </div>
+
     </section>
 
-    <section id="contact" class="section contact-section" data-section="contact">
-      <div class="contact-grid" aria-hidden="true"></div>
-      <div class="section-index mono">06</div>
-      <div class="contact-copy reveal">
-        <p class="eyebrow">OPEN CHANNEL</p>
-        <h2>Let's solve<br><i>something difficult.</i></h2>
-        <p>For technical opportunities, collaboration or a conversation about systems, security and infrastructure.</p>
-        <div class="contact-actions">
-          <a class="button button-primary magnetic" href="mailto:raghavanks71@gmail.com">raghavanks71@gmail.com <span>↗</span></a>
-          <a class="button button-ghost" href="tel:">Loading...</a>
-        </div>
+
+    <!-- CONTACT -->
+
+    <section
+      id="contact"
+      class="section contact-section"
+      data-section="contact"
+    >
+
+      <div
+        class="contact-grid"
+        aria-hidden="true"
+      ></div>
+
+      <div class="section-index mono">
+        06
       </div>
+
+
+      <div class="contact-copy reveal">
+
+        <p class="eyebrow">
+          OPEN CHANNEL
+        </p>
+
+        <h2>
+          Let's solve<br>
+          <i>something difficult.</i>
+        </h2>
+
+        <p>
+          For technical opportunities,
+          collaboration or a conversation about
+          systems, security and infrastructure.
+        </p>
+
+
+        <div class="contact-actions">
+
+          <a
+            class="button button-primary magnetic"
+            href="mailto:raghavanks71@gmail.com"
+          >
+            raghavanks71@gmail.com
+            <span>↗</span>
+          </a>
+
+          <span
+            class="button button-ghost contact-loading"
+            aria-label="Contact channel loading"
+          >
+            loadin..
+          </span>
+
+        </div>
+
+      </div>
+
+
       <footer class="site-footer mono">
-        <span>RAGHAVAN KS · MELBOURNE, AU</span>
-        <span>© <span id="year"></span> · BUILT WITH HTML / CSS / JS</span>
+
+        <span>
+          RAGHAVAN KS · MELBOURNE, AU
+        </span>
+
+        <span>
+          ©
+          <span id="year"></span>
+          · BUILT WITH HTML / CSS / JS
+        </span>
+
       </footer>
+
     </section>
+
   </main>
 
+
   <script src="script.js"></script>
+
 </body>
 </html>
