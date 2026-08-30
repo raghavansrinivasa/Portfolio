@@ -53,6 +53,11 @@
     rel="stylesheet"
     href="style.css"
   >
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="%23141419"/><rect x="7" y="7" width="50" height="50" fill="none" stroke="%23b58cff" stroke-width="3"/><text x="32" y="44" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" fill="%23f5f2fa">R</text></svg>'
+  >
 </head>
 
 <body>
@@ -90,6 +95,21 @@
       <span></span>
     </div>
 
+    <div
+      class="mascot-device"
+      id="mascotDevice"
+      aria-hidden="true"
+    >
+      <svg
+        id="mascotDeviceSvg"
+        class="mascot-device-svg"
+        viewBox="0 0 220 150"
+        preserveAspectRatio="xMidYMid meet"
+        aria-hidden="true"
+        focusable="false"
+      ></svg>
+    </div>
+
     <button
       class="mascot"
       id="mascot"
@@ -97,28 +117,7 @@
       aria-label="Customise interactive mascot"
       aria-expanded="false"
       aria-controls="mascotPanel"
-    >
-
-      <span
-        class="mascot-antenna"
-        aria-hidden="true"
-      ></span>
-
-      <span
-        class="mascot-body"
-        aria-hidden="true"
-      >
-        <span class="mascot-sensor"></span>
-        <span class="mascot-mouth"></span>
-        <span class="mascot-detail"></span>
-      </span>
-
-      <span
-        class="mascot-side"
-        aria-hidden="true"
-      ></span>
-
-    </button>
+    ></button>
 
 
     <!-- Mascot customisation panel -->
@@ -151,48 +150,74 @@
         </span>
 
         <div
-          class="mascot-options"
-          role="radiogroup"
-          aria-label="Mascot body"
-        >
+        class="mascot-options mascot-device-options"
+        role="radiogroup"
+        aria-label="Mascot body"
+      >
 
           <button
             type="button"
             class="mascot-option is-selected"
-            data-mascot-body="capsule"
+            data-mascot-body="telephone"
             role="radio"
             aria-checked="true"
-            aria-label="Capsule body"
+            aria-label="Telephone"
+            title="Telephone"
           >
-            ◇
+            ☎
           </button>
 
           <button
             type="button"
             class="mascot-option"
-            data-mascot-body="orb"
+            data-mascot-body="computer"
             role="radio"
             aria-checked="false"
-            aria-label="Orb body"
-          >
-            ○
-          </button>
-
-          <button
-            type="button"
-            class="mascot-option"
-            data-mascot-body="block"
-            role="radio"
-            aria-checked="false"
-            aria-label="Block body"
+            aria-label="Computer"
+            title="Computer"
           >
             ▣
+          </button>
+
+          <button
+            type="button"
+            class="mascot-option"
+            data-mascot-body="pager"
+            role="radio"
+            aria-checked="false"
+            aria-label="Pager"
+            title="Pager"
+          >
+            ▪
+          </button>
+
+          <button
+            type="button"
+            class="mascot-option"
+            data-mascot-body="keyboard"
+            role="radio"
+            aria-checked="false"
+            aria-label="Keyboard"
+            title="Keyboard"
+          >
+            ≡
+          </button>
+
+          <button
+            type="button"
+            class="mascot-option"
+            data-mascot-body="mouse"
+            role="radio"
+            aria-checked="false"
+            aria-label="Mouse"
+            title="Mouse"
+          >
+            ◉
           </button>
 
         </div>
 
       </div>
-
 
       <!-- SENSOR -->
 
@@ -626,11 +651,32 @@
 
           </button>
 
+
+          <button
+            class="theme-option"
+            type="button"
+            data-theme-option="poster"
+            role="radio"
+            aria-checked="false"
+          >
+
+            <span
+              class="theme-swatch theme-swatch-poster"
+              aria-hidden="true"
+            ></span>
+
+            <span>
+              <strong>POSTER</strong>
+              <small>Mustard / paper / charcoal</small>
+            </span>
+
+          </button>
+
         </div>
 
 
         <p class="theme-panel-note">
-          ...........
+          Curated palettes. Contrast and hierarchy stay intact.
         </p>
 
       </div>
@@ -682,8 +728,8 @@
         </p>
 
         <h1>
-          <span>RAGHAVAN</span>
-          <em>KS</em>
+          <span>Technical</span>
+          <em>problem solver.</em>
         </h1>
 
         <p class="hero-lede">
