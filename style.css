@@ -130,6 +130,56 @@ html[data-theme="ember"]{
 }
 
 
+
+
+/* ============================================================
+   POSTER
+   Geometric editorial palette.
+   Inspired by bold poster geometry, warm ivory,
+   graphic red and controlled cobalt.
+   ============================================================ */
+
+html[data-theme="poster"]{
+  /*
+   * POSTER / NIGHT EDITORIAL
+   *
+   * Dark ink foundation.
+   * Warm paper typography.
+   * Mustard graphic accent.
+   * Small vermilion + cobalt details.
+   */
+
+  --bg:#0b0d0f;
+  --bg-soft:#111519;
+  --panel:#151a1e;
+
+  --text:#eee9d8;
+  --muted:#9b9a91;
+
+  --line:rgba(238,233,216,.13);
+  --line-strong:rgba(238,233,216,.25);
+
+  --accent:#e0ad32;
+  --accent-soft:rgba(224,173,50,.13);
+  --accent-contrast:#11100a;
+
+  --grid-accent:rgba(224,173,50,.065);
+}
+
+
+/* FORM theme selector swatch */
+
+.theme-swatch-poster{
+  background:
+    linear-gradient(
+      135deg,
+      #f5f0d2 0 42%,
+      #f23832 42% 70%,
+      #2456a6 70% 100%
+    );
+}
+
+
 /* ============================================================
    BASE
    ============================================================ */
@@ -374,12 +424,12 @@ button{
 
   padding:1rem;
 
-  background:
-    color-mix(
-      in srgb,
-      var(--panel) 94%,
-      transparent
-    );
+  /*
+   * The colour system must visually contain itself.
+   * Keep the existing blur, but do not allow the
+   * mascot underneath to bleed through the panel.
+   */
+  background:var(--panel);
 
   border:1px solid var(--line-strong);
 
@@ -2835,4 +2885,2097 @@ button{
     transform:scaleX(1);
   }
 
+}
+
+/* ============================================================
+   MASCOT FINAL GEOMETRY OVERRIDE
+   Keep device, drag target and cable on one coordinate system.
+   ============================================================ */
+
+.mascot-system {
+  position: fixed;
+  top: 72px;
+  right: 5.2vw;
+
+  width: 300px;
+  height: 430px;
+
+  z-index: 100;
+  pointer-events: none;
+
+  --mascot-scale: 1;
+}
+
+
+/* Fixed ceiling anchor */
+
+.mascot-anchor {
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: 7px;
+  height: 7px;
+
+  transform: translateX(-50%);
+
+  z-index: 3;
+}
+
+
+/* Cable originates from exactly the same X coordinate
+   as the device and drag target. */
+
+.mascot-cable {
+  position: absolute;
+
+  left: 50%;
+  top: 4px;
+
+  width: 2px;
+  height: 87px;
+
+  transform-origin: top center;
+
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+.mascot-cable span {
+  position: absolute;
+  inset: 0;
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  background: var(--line-strong);
+
+  border-radius: 999px;
+
+  box-shadow:
+    0 0 0 1px var(--accent-soft);
+}
+
+
+/* ============================================================
+   VISUAL DEVICE
+   ============================================================ */
+
+.mascot-device {
+  position: absolute;
+
+  left: 50%;
+  top: 91px;
+
+  width: 220px;
+  height: 150px;
+
+  transform:
+    translateX(-50%)
+    scale(var(--mascot-scale, 1));
+
+  transform-origin: 50% 0%;
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mascot-device-svg {
+  display: block;
+
+  width: 220px;
+  height: 150px;
+
+  overflow: visible;
+
+  color: var(--accent);
+
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   INVISIBLE INTERACTION TARGET
+   ============================================================ */
+
+.mascot {
+  position: absolute;
+
+  left: 50%;
+  top: 91px;
+
+  width: 220px;
+  height: 150px;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+
+  transform:
+    translateX(-50%);
+
+  transform-origin: 50% 0%;
+
+  z-index: 4;
+
+  cursor: grab;
+
+  pointer-events: auto;
+
+  opacity: 0;
+}
+
+.mascot:active {
+  cursor: grabbing;
+}
+
+
+/* Never let the old CSS mascot pieces interfere
+   with the SVG renderer. */
+
+.mascot > .mascot-antenna,
+.mascot > .mascot-body,
+.mascot > .mascot-side {
+  display: none !important;
+}
+
+
+/* ============================================================
+   SCALE
+   ============================================================ */
+
+.mascot-system[data-body] .mascot-device,
+.mascot-system[data-body] .mascot-device-svg {
+  transform-origin: 50% 0%;
+}
+
+
+/* ============================================================
+   SLIDERS
+   ============================================================ */
+
+.mascot-slider input[type="range"] {
+  width: 100%;
+  height: 4px;
+
+  margin: 0;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  background:
+    linear-gradient(
+      to right,
+      var(--accent) 0%,
+      var(--accent) var(--slider-progress, 50%),
+      var(--line-strong) var(--slider-progress, 50%),
+      var(--line-strong) 100%
+    );
+
+  border-radius: 999px;
+
+  cursor: pointer;
+}
+
+.mascot-slider input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+
+  background: transparent;
+
+  border: 0;
+  border-radius: 999px;
+}
+
+.mascot-slider input[type="range"]::-moz-range-track {
+  height: 4px;
+
+  background: var(--line-strong);
+
+  border: 0;
+  border-radius: 999px;
+}
+
+.mascot-slider input[type="range"]::-moz-range-progress {
+  height: 4px;
+
+  background: var(--accent);
+
+  border-radius: 999px;
+}
+
+.mascot-slider input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 14px;
+  height: 14px;
+
+  margin-top: -5px;
+
+  background: var(--accent);
+
+  border: 0;
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 3px var(--accent-soft);
+
+  cursor: grab;
+}
+
+.mascot-slider input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+
+  background: var(--accent);
+
+  border: 0;
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 3px var(--accent-soft);
+
+  cursor: grab;
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .mascot-system {
+    right: 3vw;
+  }
+}
+
+@media (max-width: 560px) {
+  .mascot-system {
+    top: 68px;
+    right: 1vw;
+
+    transform: scale(.7);
+    transform-origin: top right;
+  }
+
+  .mascot-panel {
+    right: 0;
+    width: 245px;
+  }
+}
+
+/* ============================================================
+   MASCOT CONTROL CONSOLE — FINAL UI
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   CONTROL GROUPS
+   ------------------------------------------------------------ */
+
+.mascot-control {
+  width: 100%;
+  margin-top: .72rem;
+}
+
+.mascot-control > .mono,
+.mascot-control-label {
+  display: block;
+
+  margin-bottom: .42rem;
+
+  color: var(--muted);
+
+  font:
+    500 .52rem
+    "JetBrains Mono",
+    monospace;
+
+  letter-spacing: .14em;
+}
+
+
+/* ------------------------------------------------------------
+   BODY / OPTION ROWS
+   ------------------------------------------------------------ */
+
+.mascot-options {
+  display: grid;
+
+  grid-auto-flow: column;
+  grid-auto-columns: 31px;
+
+  gap: 4px;
+
+  width: max-content;
+
+  padding: 0;
+
+  align-items: center;
+}
+
+
+/*
+ * Every option is deliberately identical.
+ * This fixes the visual inconsistency between BODY,
+ * SENSOR, MOOD and ACCESSORY.
+ */
+
+.mascot-option {
+  box-sizing: border-box;
+
+  width: 31px;
+  height: 31px;
+
+  min-width: 31px;
+  min-height: 31px;
+
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--line-strong) 85%,
+      transparent
+    );
+
+  background:
+    color-mix(
+      in srgb,
+      var(--panel) 35%,
+      transparent
+    );
+
+  color: var(--muted);
+
+  font-size: .66rem;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    border-color .18s ease,
+    background .18s ease,
+    color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+
+
+/* Hover */
+
+.mascot-option:hover {
+  border-color: var(--accent);
+
+  color: var(--accent);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--accent) 5%,
+      transparent
+    );
+}
+
+
+/* Selected */
+
+.mascot-option.is-selected {
+  border-color: var(--accent);
+
+  color: var(--accent);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--accent) 9%,
+      transparent
+    );
+
+  box-shadow:
+    inset 0 0 0 1px
+    var(--accent-soft),
+    0 0 12px
+    color-mix(
+      in srgb,
+      var(--accent) 10%,
+      transparent
+    );
+}
+
+
+/* Small selected indicator */
+
+.mascot-option.is-selected::after {
+  content: "";
+
+  position: absolute;
+
+  width: 3px;
+  height: 3px;
+
+  margin-top: 23px;
+
+  background: var(--accent);
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 7px
+    var(--accent-soft);
+}
+
+
+/* Don't allow the old option sizing rules to leak through */
+
+.mascot-device-options,
+.mascot-options[role="radiogroup"] {
+  width: max-content;
+}
+
+
+/* ------------------------------------------------------------
+   SLIDER INSTRUMENT
+   ------------------------------------------------------------ */
+
+.mascot-slider {
+  width: 100%;
+
+  margin-top: 1rem;
+}
+
+
+/* Header */
+
+.mascot-slider > div:first-child {
+  display: flex;
+
+  align-items: baseline;
+  justify-content: space-between;
+
+  margin-bottom: .55rem;
+}
+
+
+.mascot-slider .mono {
+  color: var(--muted);
+
+  font:
+    500 .52rem
+    "JetBrains Mono",
+    monospace;
+
+  letter-spacing: .14em;
+}
+
+
+.mascot-slider output {
+  color: var(--accent);
+
+  font:
+    500 .5rem
+    "JetBrains Mono",
+    monospace;
+
+  letter-spacing: .08em;
+}
+
+
+/* ------------------------------------------------------------
+   RANGE TRACK
+   ------------------------------------------------------------ */
+
+.mascot-slider input[type="range"] {
+  --slider-progress: 50%;
+
+  display: block;
+
+  width: 100%;
+  height: 22px;
+
+  margin: 0;
+
+  padding: 0;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+
+/* Chrome / Brave / Chromium */
+
+.mascot-slider
+input[type="range"]::-webkit-slider-runnable-track {
+
+  height: 2px;
+
+  border: 0;
+
+  background:
+    linear-gradient(
+      to right,
+      var(--accent) 0,
+      var(--accent) var(--slider-progress),
+      var(--line-strong) var(--slider-progress),
+      var(--line-strong) 100%
+    );
+}
+
+
+/* Firefox */
+
+.mascot-slider
+input[type="range"]::-moz-range-track {
+
+  height: 2px;
+
+  border: 0;
+
+  background: var(--line-strong);
+}
+
+
+.mascot-slider
+input[type="range"]::-moz-range-progress {
+
+  height: 2px;
+
+  background: var(--accent);
+}
+
+
+/* ------------------------------------------------------------
+   TECHNICAL DIAMOND THUMB
+   ------------------------------------------------------------ */
+
+.mascot-slider
+input[type="range"]::-webkit-slider-thumb {
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 12px;
+  height: 12px;
+
+  margin-top: -5px;
+
+  background: var(--accent);
+
+  border: 0;
+
+  border-radius: 1px;
+
+  transform: rotate(45deg);
+
+  box-shadow:
+    0 0 0 2px
+    var(--panel),
+    0 0 10px
+    var(--accent-soft);
+
+  cursor: grab;
+}
+
+
+.mascot-slider
+input[type="range"]::-webkit-slider-thumb:active {
+  cursor: grabbing;
+}
+
+
+.mascot-slider
+input[type="range"]::-moz-range-thumb {
+
+  width: 10px;
+  height: 10px;
+
+  background: var(--accent);
+
+  border: 0;
+
+  border-radius: 1px;
+
+  box-shadow:
+    0 0 0 2px
+    var(--panel),
+    0 0 10px
+    var(--accent-soft);
+
+  cursor: grab;
+}
+
+
+/* ------------------------------------------------------------
+   THREE POSITION MARKERS
+   ------------------------------------------------------------ */
+
+.mascot-slider {
+  position: relative;
+}
+
+
+/*
+ * Subtle technical tick marks are produced by the slider
+ * background itself. They align with values 01 / 02 / 03.
+ */
+
+.mascot-slider input[type="range"] {
+  background-image:
+    linear-gradient(
+      to right,
+      transparent 0,
+      transparent calc(50% - .5px),
+      var(--line) calc(50% - .5px),
+      var(--line) calc(50% + .5px),
+      transparent calc(50% + .5px),
+      transparent 100%
+    );
+}
+
+
+/* ------------------------------------------------------------
+   INDEX / POSITION NUMBERS
+   ------------------------------------------------------------ */
+
+.mascot-slider::after {
+  content: "01                         02                         03";
+
+  display: block;
+
+  width: 100%;
+
+  margin-top: -.05rem;
+
+  color: var(--muted);
+
+  opacity: .55;
+
+  font:
+    400 .42rem
+    "JetBrains Mono",
+    monospace;
+
+  letter-spacing: .04em;
+
+  white-space: pre;
+
+  text-align: center;
+
+  pointer-events: none;
+}
+
+
+/* ------------------------------------------------------------
+   ELASTICITY / SIZE SPACING
+   ------------------------------------------------------------ */
+
+.mascot-slider + .mascot-slider {
+  margin-top: .95rem;
+}
+
+
+/* ------------------------------------------------------------
+   PANEL RHYTHM
+   ------------------------------------------------------------ */
+
+.mascot-panel .mascot-control:first-of-type {
+  margin-top: .1rem;
+}
+
+.mascot-panel .mascot-slider:first-of-type {
+  margin-top: 1.05rem;
+}
+
+
+/* ------------------------------------------------------------
+   SMALL SCREENS
+   ------------------------------------------------------------ */
+
+@media (max-width: 560px) {
+
+  .mascot-options {
+    grid-auto-columns: 29px;
+    gap: 4px;
+  }
+
+  .mascot-option {
+    width: 29px;
+    height: 29px;
+
+    min-width: 29px;
+    min-height: 29px;
+  }
+
+}
+
+
+
+/* ============================================================
+   MASCOT FINAL UI POLISH
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   BODY = ONE SEGMENTED CONTROL
+   ------------------------------------------------------------ */
+
+.mascot-device-options {
+  display: flex !important;
+
+  align-items: stretch;
+  gap: 0 !important;
+
+  width: max-content !important;
+
+  padding: 0 !important;
+
+  border: 1px solid var(--line-strong);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--panel) 30%,
+      transparent
+    );
+}
+
+
+/*
+ * The individual buttons become cells rather than
+ * independent floating controls.
+ */
+
+.mascot-device-options .mascot-option {
+  position: relative;
+
+  width: 34px !important;
+  height: 32px !important;
+
+  min-width: 34px !important;
+  min-height: 32px !important;
+
+  border: 0 !important;
+  border-right: 1px solid var(--line-strong) !important;
+
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
+
+  background: transparent;
+}
+
+
+/* Remove the final divider */
+
+.mascot-device-options
+.mascot-option:last-child {
+  border-right: 0 !important;
+}
+
+
+/* Selected cell */
+
+.mascot-device-options
+.mascot-option.is-selected {
+  background:
+    color-mix(
+      in srgb,
+      var(--accent) 12%,
+      transparent
+    ) !important;
+
+  color: var(--accent) !important;
+
+  box-shadow:
+    inset 0 0 0 1px var(--accent) !important;
+}
+
+
+/* Small active marker */
+
+.mascot-device-options
+.mascot-option.is-selected::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: 4px;
+
+  width: 3px;
+  height: 3px;
+
+  margin: 0;
+
+  transform: translateX(-50%);
+
+  background: var(--accent);
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 7px var(--accent-soft);
+}
+
+
+/* Hover */
+
+.mascot-device-options
+.mascot-option:hover:not(.is-selected) {
+  background:
+    color-mix(
+      in srgb,
+      var(--accent) 5%,
+      transparent
+    );
+
+  color: var(--accent);
+}
+
+
+/* ------------------------------------------------------------
+   SPACE BETWEEN OPTION CONTROLS AND SPRING
+   ------------------------------------------------------------ */
+
+/*
+ * The elasticity control is deliberately separated from
+ * ACCESSORY so the panel doesn't feel vertically cramped.
+ */
+
+.mascot-slider:first-of-type {
+  margin-top: 1.55rem !important;
+}
+
+
+/* Slightly tighten the slider pair afterwards */
+
+.mascot-slider + .mascot-slider {
+  margin-top: 1rem !important;
+}
+
+
+/* Give the panel's bottom area a little breathing room */
+
+.mascot-slider:last-of-type {
+  margin-bottom: .35rem;
+}
+
+
+/* ------------------------------------------------------------
+   KEEP THE PANEL INTERNALLY CONSISTENT
+   ------------------------------------------------------------ */
+
+.mascot-control {
+  width: 100%;
+}
+
+.mascot-control > .mono,
+.mascot-control-label {
+  line-height: 1;
+}
+
+
+/* Sensor / mood / accessory retain individual cells,
+   but align with the body instrument. */
+
+.mascot-control .mascot-options:not(.mascot-device-options) {
+  margin-left: 0;
+}
+
+
+/* Make every row start at exactly the same x position. */
+
+.mascot-control,
+.mascot-slider {
+  box-sizing: border-box;
+}
+
+
+/* ------------------------------------------------------------
+   PANEL WIDTH
+   ------------------------------------------------------------ */
+
+.mascot-panel {
+  box-sizing: border-box;
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE
+   ------------------------------------------------------------ */
+
+@media (max-width: 560px) {
+
+  .mascot-device-options .mascot-option {
+    width: 32px !important;
+    min-width: 32px !important;
+  }
+
+}
+
+
+/* ============================================================
+   MASCOT BODY SELECTOR — FIT THE CONTROL COLUMN
+   ============================================================ */
+
+.mascot-control {
+  grid-template-columns:
+    68px
+    minmax(0, 1fr) !important;
+
+  gap: .55rem !important;
+
+  min-width: 0;
+}
+
+
+/* Five body choices must live inside one bounded control. */
+
+.mascot-device-options {
+  display: grid !important;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 3px !important;
+
+  width: 100% !important;
+  max-width: 180px;
+
+  min-width: 0;
+
+  padding: 0;
+
+  border: 1px solid var(--line-strong);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--panel) 35%,
+      transparent
+    );
+}
+
+
+/* Every body cell has identical geometry. */
+
+.mascot-device-options .mascot-option {
+  position: relative;
+
+  width: auto !important;
+  min-width: 0 !important;
+
+  height: 30px !important;
+  min-height: 30px !important;
+
+  margin: 0 !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  background: transparent;
+
+  box-shadow: none !important;
+}
+
+
+/* Divider between body cells. */
+
+.mascot-device-options
+.mascot-option:not(:last-child) {
+  border-right:
+    1px solid var(--line) !important;
+}
+
+
+/* Selected body cell. */
+
+.mascot-device-options
+.mascot-option.is-selected {
+  color: var(--accent) !important;
+
+  background:
+    var(--accent-soft) !important;
+
+  box-shadow:
+    inset 0 0 0 1px
+    var(--accent) !important;
+}
+
+
+/* Active marker stays inside its own cell. */
+
+.mascot-device-options
+.mascot-option.is-selected::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: 3px;
+
+  width: 3px;
+  height: 3px;
+
+  margin: 0;
+
+  transform:
+    translateX(-50%);
+
+  background: var(--accent);
+
+  border-radius: 50%;
+}
+
+
+/* SENSOR / MOOD / ACCESSORY remain normal compact groups. */
+
+.mascot-control
+.mascot-options:not(.mascot-device-options) {
+  display: flex;
+
+  flex-wrap: nowrap;
+
+  gap: 4px;
+
+  width: max-content;
+
+  max-width: 100%;
+}
+
+
+/* All non-body buttons use the same dimensions. */
+
+.mascot-control
+.mascot-options:not(.mascot-device-options)
+.mascot-option {
+  flex: 0 0 31px;
+
+  width: 31px !important;
+  min-width: 31px !important;
+
+  height: 29px !important;
+  min-height: 29px !important;
+}
+
+
+/* ============================================================
+   MASCOT — BODY SELECTOR
+   Five devices, one consistent grid.
+   ============================================================ */
+
+.mascot-device-options {
+  display: grid !important;
+  grid-template-columns: repeat(5, 32px) !important;
+  grid-template-rows: 32px !important;
+  gap: 6px !important;
+
+  width: max-content !important;
+  max-width: none !important;
+
+  align-items: center !important;
+  justify-content: start !important;
+}
+
+.mascot-device-options .mascot-option {
+  box-sizing: border-box !important;
+
+  width: 32px !important;
+  min-width: 32px !important;
+  max-width: 32px !important;
+
+  height: 32px !important;
+  min-height: 32px !important;
+  max-height: 32px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  line-height: 1 !important;
+
+  flex: none !important;
+}
+
+/* Keep selected and unselected body cells identical in size. */
+.mascot-device-options .mascot-option,
+.mascot-device-options .mascot-option.is-selected {
+  box-sizing: border-box !important;
+}
+
+/* ============================================================
+   OTHER MASCOT OPTION GROUPS
+   Keep these compact and independent from BODY.
+   ============================================================ */
+
+.mascot-control:not(:has(.mascot-device-options))
+  .mascot-options {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 6px !important;
+  width: max-content !important;
+}
+
+.mascot-control:not(:has(.mascot-device-options))
+  .mascot-option {
+  box-sizing: border-box !important;
+
+  width: 32px !important;
+  min-width: 32px !important;
+
+  height: 30px !important;
+  min-height: 30px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  flex: none !important;
+}
+
+
+
+/* ============================================================
+   MASCOT BODY SELECTOR — FINAL
+   Target the actual body controls, not a wrapper class.
+   ============================================================ */
+
+#mascotPanel [data-mascot-body] {
+  box-sizing: border-box !important;
+
+  width: 32px !important;
+  min-width: 32px !important;
+  max-width: 32px !important;
+
+  height: 32px !important;
+  min-height: 32px !important;
+  max-height: 32px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  flex: 0 0 32px !important;
+
+  line-height: 1 !important;
+}
+
+/*
+ * Make the BODY row itself consistent.
+ */
+#mascotPanel [data-mascot-body] {
+  position: relative;
+}
+
+/*
+ * Selected state must not change dimensions.
+ */
+#mascotPanel [data-mascot-body].is-selected {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+}
+
+/*
+ * Keep the body options on one clean row.
+ */
+#mascotPanel .mascot-control:has([data-mascot-body])
+  .mascot-options {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 6px !important;
+  width: max-content !important;
+}
+
+
+
+/* ============================================================
+   SPACE BETWEEN MASCOT SYSTEM AND COLOUR SYSTEM
+   ============================================================ */
+
+/*
+ * Keep the mascot panel visually separated from the
+ * colour/theme control above it.
+ */
+#mascotPanel.mascot-panel {
+  margin-top: 42px !important;
+}
+
+/*
+ * On smaller screens, reduce the separation slightly
+ * without removing it.
+ */
+@media (max-width: 900px) {
+  #mascotPanel.mascot-panel {
+    margin-top: 34px !important;
+  }
+}
+
+@media (max-width: 560px) {
+  #mascotPanel.mascot-panel {
+    width: min(340px, calc(100vw - 32px)) !important;
+    min-width: 0 !important;
+    margin-top: 30px !important;
+  }
+}
+
+
+/* ============================================================
+   FINAL MASCOT / THEME PANEL POSITIONING
+   ============================================================ */
+
+/*
+ * The mascot panel belongs to the mascot-system coordinate
+ * space. Do not push it down with margin or transform.
+ */
+#mascotPanel.mascot-panel {
+  top: 166px !important;
+  right: 0 !important;
+
+  margin-top: 0 !important;
+  transform: none !important;
+
+  z-index: 105 !important;
+}
+
+/*
+ * The theme panel remains attached to its own theme toggle.
+ */
+#themePanel.theme-panel {
+  top: calc(100% + 12px) !important;
+  right: 0 !important;
+
+  margin-top: 0 !important;
+  transform: none !important;
+
+  z-index: 110 !important;
+}
+
+/*
+ * Hidden panels must disappear completely.
+ */
+#themePanel.theme-panel[hidden],
+#mascotPanel.mascot-panel[hidden] {
+  display: none !important;
+}
+
+/*
+ * Smaller mascot-system layout.
+ */
+@media (max-width: 560px) {
+
+  #mascotPanel.mascot-panel {
+    top: 166px !important;
+    right: 0 !important;
+  }
+
+}
+
+
+/* ============================================================
+   FINAL MASCOT PANEL LAYOUT
+   ============================================================ */
+
+/*
+ * The panel itself owns the complete BODY row.
+ * We are NOT increasing individual BODY button sizes.
+ */
+#mascotPanel.mascot-panel {
+  box-sizing: border-box !important;
+
+  width: 320px !important;
+  min-width: 320px !important;
+
+  padding: 18px 18px 16px !important;
+
+  z-index: 105 !important;
+}
+
+
+/*
+ * BODY is a single five-button row.
+ * The buttons stay uniform and the panel contains them.
+ */
+#mascotPanel .mascot-control:first-of-type {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#mascotPanel .mascot-control:first-of-type .mascot-options {
+  width: 100% !important;
+  max-width: none !important;
+
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+
+  gap: 6px !important;
+
+  box-sizing: border-box !important;
+}
+
+
+/*
+ * Every BODY button gets the same footprint.
+ * No individual button is allowed to push outside the panel.
+ */
+#mascotPanel .mascot-control:first-of-type .mascot-option {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+
+  height: 32px !important;
+  min-height: 32px !important;
+
+  box-sizing: border-box !important;
+
+  margin: 0 !important;
+}
+
+
+/*
+ * Other option groups remain compact.
+ */
+#mascotPanel .mascot-control:not(:first-of-type) .mascot-options {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 6px !important;
+}
+
+
+/* ============================================================
+   COLOUR SYSTEM / MASCOT SYSTEM SEPARATION
+   ============================================================ */
+
+/*
+ * Keep the colour toggle above the mascot.
+ */
+#themeToggle {
+  position: relative;
+  z-index: 210 !important;
+}
+
+
+/*
+ * Colour panel gets its own layer.
+ */
+#themePanel {
+  z-index: 200 !important;
+}
+
+
+/*
+ * Mascot remains underneath the colour system.
+ */
+#mascotSystem {
+  z-index: 35 !important;
+}
+
+
+/*
+ * Mascot customiser itself sits above the mascot device,
+ * but below the colour system.
+ */
+#mascotPanel {
+  z-index: 100 !important;
+}
+
+
+/*
+ * Never let hidden panels participate in layout/painting.
+ */
+#themePanel[hidden],
+#mascotPanel[hidden] {
+  display: none !important;
+}
+
+
+/*
+ * On narrow screens, let the mascot panel use the available
+ * width while still containing the five BODY controls.
+ */
+@media (max-width: 560px) {
+
+  #mascotPanel.mascot-panel {
+    width: min(320px, calc(100vw - 24px)) !important;
+    min-width: 0 !important;
+  }
+
+}
+
+
+/* ============================================================
+   END FINAL MASCOT PANEL LAYOUT
+   ============================================================ */
+
+
+/* ============================================================
+   THEME PANEL STACKING FIX
+   The colour system must sit completely above the mascot.
+   Do not alter mascot positioning or dimensions.
+   ============================================================ */
+
+.theme-control {
+  position: relative;
+  z-index: 120 !important;
+}
+
+.theme-panel {
+  position: absolute;
+  z-index: 121 !important;
+}
+
+
+
+/* ============================================================
+   FINAL THEME / MASCOT STACK FIX
+   The colour system lives inside .site-header.
+   Raise the header stacking context above the mascot.
+   
+   IMPORTANT:
+   - Does NOT move the mascot
+   - Does NOT resize the mascot
+   - Does NOT change mascot spacing
+   - Does NOT change the theme panel position
+   ============================================================ */
+
+.site-header {
+  position: relative;
+  z-index: 60 !important;
+}
+
+.theme-control {
+  position: relative;
+  z-index: 61 !important;
+}
+
+.theme-panel {
+  z-index: 62 !important;
+}
+
+
+
+/* ============================================================
+   POSTER — ART DIRECTION
+   ============================================================ */
+
+/*
+ * The existing site remains structurally unchanged.
+ * These rules activate ONLY when POSTER is selected.
+ */
+
+html[data-theme="poster"] body{
+  background:
+    radial-gradient(
+      circle at 82% 14%,
+      rgba(216,169,40,.16),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 12% 82%,
+      rgba(31,69,105,.055),
+      transparent 24%
+    ),
+    var(--bg);
+
+  color:var(--text);
+}
+
+
+/* ------------------------------------------------------------
+   PAPER TEXTURE
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] body::before{
+  content:"";
+
+  position:fixed;
+  inset:0;
+
+  pointer-events:none;
+  z-index:-1;
+
+  opacity:.22;
+
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(23,23,20,.025) 0px,
+      rgba(23,23,20,.025) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+
+  mix-blend-mode:multiply;
+}
+
+
+/* ------------------------------------------------------------
+   EDITORIAL GRID
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] .hero,
+html[data-theme="poster"] section{
+  position:relative;
+}
+
+
+/*
+ * Thin registration-style geometry.
+ */
+
+html[data-theme="poster"] .hero::after{
+  content:"";
+
+  position:absolute;
+
+  width:92px;
+  height:92px;
+
+  right:4%;
+  top:12%;
+
+  border:
+    1px solid
+    rgba(23,23,20,.14);
+
+  border-radius:50%;
+
+  box-shadow:
+    0 0 0 7px
+    rgba(216,169,40,.08),
+    0 0 0 14px
+    rgba(216,169,40,.035);
+
+  pointer-events:none;
+}
+
+
+/* ------------------------------------------------------------
+   HEADINGS
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] h1,
+html[data-theme="poster"] h2,
+html[data-theme="poster"] h3{
+  color:var(--text);
+  letter-spacing:-.035em;
+}
+
+
+html[data-theme="poster"] .hero h1{
+  text-shadow:
+    2px 2px 0 rgba(216,169,40,.18);
+}
+
+
+/* ------------------------------------------------------------
+   ACCENT ELEMENTS
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] .accent,
+html[data-theme="poster"] strong{
+  color:#a87900;
+}
+
+
+html[data-theme="poster"] a:hover{
+  color:#a87900;
+}
+
+
+/* ------------------------------------------------------------
+   BUTTONS
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] button{
+  color:var(--text);
+}
+
+
+html[data-theme="poster"] .button,
+html[data-theme="poster"] .cta,
+html[data-theme="poster"] [class*="button"]{
+  border-color:var(--text);
+}
+
+
+html[data-theme="poster"] .button:hover,
+html[data-theme="poster"] .cta:hover,
+html[data-theme="poster"] [class*="button"]:hover{
+  background:var(--accent);
+  color:var(--accent-contrast);
+  border-color:var(--accent);
+}
+
+
+/* ------------------------------------------------------------
+   PANELS / CARDS
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] .panel,
+html[data-theme="poster"] .card{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.22),
+      transparent 55%
+    ),
+    var(--panel);
+
+  border-color:var(--line-strong);
+}
+
+
+html[data-theme="poster"] .panel:hover,
+html[data-theme="poster"] .card:hover{
+  border-color:var(--accent);
+}
+
+
+/* ------------------------------------------------------------
+   THEME SELECTOR
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] .theme-panel{
+  background:var(--panel);
+  border-color:var(--line-strong);
+}
+
+
+html[data-theme="poster"] .theme-option.is-selected{
+  border-color:var(--accent);
+  background:var(--accent-soft);
+}
+
+
+html[data-theme="poster"] .theme-swatch-poster{
+  background:
+    linear-gradient(
+      135deg,
+      #d8a928 0 48%,
+      #171714 48% 72%,
+      #c94735 72% 86%,
+      #eee7d3 86%
+    );
+  border-color:#171714;
+}
+
+
+/* ------------------------------------------------------------
+   MASCOT
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] .mascot-system{
+  --mascot-accent:#d8a928;
+}
+
+
+html[data-theme="poster"] .mascot-device-svg{
+  color:var(--accent);
+}
+
+
+html[data-theme="poster"] .mascot-cable{
+  background:var(--text);
+}
+
+
+html[data-theme="poster"] .mascot-panel{
+  background:var(--panel);
+  border-color:var(--line-strong);
+}
+
+
+/* ------------------------------------------------------------
+   SMALL POSTER MARK
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] .section::before{
+  border-color:rgba(23,23,20,.14);
+}
+
+
+/* ------------------------------------------------------------
+   SELECTION
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] ::selection{
+  background:#d8a928;
+  color:#171714;
+}
+
+
+/* ============================================================
+   POSTER — NIGHT EDITORIAL
+   ============================================================ */
+
+/*
+ * IMPORTANT:
+ * These rules are isolated to POSTER.
+ *
+ * Existing themes, layout, mascot behaviour,
+ * panels and controls remain untouched.
+ */
+
+
+/* ------------------------------------------------------------
+   FOUNDATION
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] body{
+  background:
+    radial-gradient(
+      circle at 82% 18%,
+      rgba(224,173,50,.075),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 14% 76%,
+      rgba(42,76,112,.055),
+      transparent 26%
+    ),
+    var(--bg);
+
+  color:var(--text);
+}
+
+
+/* ------------------------------------------------------------
+   SUBTLE PRINT / GRAIN FEEL
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] body::before{
+  content:"";
+
+  position:fixed;
+  inset:0;
+
+  pointer-events:none;
+
+  z-index:-1;
+
+  opacity:.13;
+
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(238,233,216,.025) 0,
+      rgba(238,233,216,.025) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+}
+
+
+/* ------------------------------------------------------------
+   POSTER GEOMETRY
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] .hero{
+  position:relative;
+}
+
+
+/*
+ * Large mustard registration circle.
+ *
+ * Kept deliberately subtle so it does not compete
+ * with the actual portfolio content.
+ */
+
+html[data-theme="poster"] .hero::after{
+  content:"";
+
+  position:absolute;
+
+  width:180px;
+  height:180px;
+
+  right:3%;
+  top:8%;
+
+  border:
+    1px solid
+    rgba(224,173,50,.22);
+
+  border-radius:50%;
+
+  box-shadow:
+    0 0 0 12px
+      rgba(224,173,50,.025),
+    0 0 0 28px
+      rgba(224,173,50,.018);
+
+  pointer-events:none;
+
+  z-index:-1;
+}
+
+
+/*
+ * Small editorial registration mark.
+ */
+
+html[data-theme="poster"] .hero::before{
+  content:"+";
+
+  position:absolute;
+
+  right:4.5%;
+  top:5%;
+
+  color:rgba(224,173,50,.48);
+
+  font-family:monospace;
+
+  font-size:18px;
+
+  line-height:1;
+
+  pointer-events:none;
+
+  z-index:1;
+}
+
+
+/* ------------------------------------------------------------
+   TYPOGRAPHY
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] h1,
+html[data-theme="poster"] h2,
+html[data-theme="poster"] h3{
+  color:var(--text);
+}
+
+
+/*
+ * Slight poster-print offset on the primary hero heading.
+ */
+
+html[data-theme="poster"] .hero h1{
+  text-shadow:
+    2px 2px 0
+    rgba(224,173,50,.12);
+}
+
+
+/* ------------------------------------------------------------
+   MUSTARD ACCENTS
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] strong{
+  color:var(--accent);
+}
+
+
+html[data-theme="poster"] .accent{
+  color:var(--accent);
+}
+
+
+html[data-theme="poster"] a:hover{
+  color:var(--accent);
+}
+
+
+/* ------------------------------------------------------------
+   EDITORIAL LINES
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] hr{
+  border-color:var(--line-strong);
+}
+
+
+/* ------------------------------------------------------------
+   BUTTONS
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] button{
+  color:var(--text);
+}
+
+
+html[data-theme="poster"] .button,
+html[data-theme="poster"] .cta,
+html[data-theme="poster"] [class*="button"]{
+  border-color:var(--line-strong);
+}
+
+
+html[data-theme="poster"] .button:hover,
+html[data-theme="poster"] .cta:hover,
+html[data-theme="poster"] [class*="button"]:hover{
+  background:var(--accent);
+  color:var(--accent-contrast);
+
+  border-color:var(--accent);
+}
+
+
+/* ------------------------------------------------------------
+   PANELS / CARDS
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] .panel,
+html[data-theme="poster"] .card{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(238,233,216,.025),
+      transparent 58%
+    ),
+    var(--panel);
+
+  border-color:var(--line);
+}
+
+
+html[data-theme="poster"] .panel:hover,
+html[data-theme="poster"] .card:hover{
+  border-color:rgba(224,173,50,.55);
+}
+
+
+/* ------------------------------------------------------------
+   THEME SELECTOR
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] .theme-panel{
+  background:var(--panel);
+
+  border-color:var(--line-strong);
+
+  color:var(--text);
+}
+
+
+html[data-theme="poster"] .theme-option.is-selected{
+  background:var(--accent-soft);
+
+  border-color:var(--accent);
+}
+
+
+/*
+ * POSTER swatch:
+ * mustard / ink / vermilion / cobalt
+ */
+
+html[data-theme="poster"] .theme-swatch-poster{
+  background:
+    linear-gradient(
+      135deg,
+      #e0ad32 0 45%,
+      #0b0d0f 45% 68%,
+      #c94b3d 68% 82%,
+      #315c86 82% 100%
+    );
+
+  border-color:#eee9d8;
+}
+
+
+/* ------------------------------------------------------------
+   MASCOT
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] .mascot-device-svg{
+  color:var(--accent);
+}
+
+
+html[data-theme="poster"] .mascot-cable{
+  background:var(--text);
+}
+
+
+html[data-theme="poster"] .mascot-panel{
+  background:var(--panel);
+
+  border-color:var(--line-strong);
+}
+
+
+/* ------------------------------------------------------------
+   SUBTLE BLUE / RED PRINT MARKS
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] .section:nth-child(3n)::after{
+  content:"";
+
+  position:absolute;
+
+  width:5px;
+  height:5px;
+
+  right:2.5%;
+  top:18%;
+
+  background:#315c86;
+
+  opacity:.42;
+
+  pointer-events:none;
+}
+
+
+html[data-theme="poster"] .section:nth-child(4n)::after{
+  content:"";
+
+  position:absolute;
+
+  width:7px;
+  height:2px;
+
+  right:2.5%;
+  top:20%;
+
+  background:#c94b3d;
+
+  opacity:.42;
+
+  pointer-events:none;
+}
+
+
+/* ------------------------------------------------------------
+   SELECTION
+   ------------------------------------------------------------ */
+
+html[data-theme="poster"] ::selection{
+  background:var(--accent);
+
+  color:var(--accent-contrast);
 }
