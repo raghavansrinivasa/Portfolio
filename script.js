@@ -2,36 +2,31 @@
   "use strict";
 
   /*
-   * ============================================================
    * RAGHAVAN KS — PORTFOLIO SCRIPT
-   * ============================================================
    *
-   * Systems:
+   * Core:
+   * 01. Theme / colour system
+   * 02. Year
+   * 03. Scroll reveals
+   * 04. Cursor glow
+   * 05. Magnetic interactions
+   * 06. Active navigation
+   * 07. Hero parallax
+   * 08. Retro technical mascot
    *
-   * 01. Colour system
-   * 02. Scroll reveals
-   * 03. Cursor glow
-   * 04. Magnetic buttons
-   * 05. Active section navigation
-   * 06. Hero environmental parallax
-   * 07. Interactive mascot
+   * Mascot:
+   * Telephone / Computer / Pager / Keyboard / Mouse
    *
-   * No external animation libraries.
-   * ============================================================
+   * No frameworks.
+   * No animation libraries.
+   * No external SVG dependencies.
    */
 
+  const root = document.documentElement;
 
-  /* ==========================================================
-     GLOBAL
-     ========================================================== */
-
-  const root =
-    document.documentElement;
-
-  const reduced =
-    window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+  const reduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
 
   /* ==========================================================
@@ -39,14 +34,10 @@
      ========================================================== */
 
   const themeToggle =
-    document.getElementById(
-      "themeToggle"
-    );
+    document.getElementById("themeToggle");
 
   const themePanel =
-    document.getElementById(
-      "themePanel"
-    );
+    document.getElementById("themePanel");
 
   const themeOptions =
     document.querySelectorAll(
@@ -56,101 +47,75 @@
   const themeStorageKey =
     "portfolio-theme";
 
-
   const themes = [
     "signal",
     "amber",
     "violet",
     "ice",
-    "ember"
+    "ember",
+    "poster"
   ];
 
 
-  /*
-   * Apply a colour system.
-   *
-   * The CSS listens for:
-   *
-   * html[data-theme="signal"]
-   * html[data-theme="amber"]
-   * html[data-theme="violet"]
-   * html[data-theme="ice"]
-   * html[data-theme="ember"]
-   */
   function applyTheme(theme) {
 
-    if (
-      !themes.includes(theme)
-    ) {
+    if (!themes.includes(theme)) {
       theme = "signal";
     }
-
 
     root.setAttribute(
       "data-theme",
       theme
     );
 
+    try {
+      localStorage.setItem(
+        themeStorageKey,
+        theme
+      );
+    } catch {}
 
-    localStorage.setItem(
-      themeStorageKey,
-      theme
-    );
+    themeOptions.forEach(option => {
 
+      const selected =
+        option.dataset.themeOption === theme;
 
-    themeOptions.forEach(
-      option => {
+      option.classList.toggle(
+        "is-selected",
+        selected
+      );
 
-        const selected =
-          option.dataset.themeOption ===
-          theme;
+      option.setAttribute(
+        "aria-checked",
+        selected ? "true" : "false"
+      );
 
-        option.classList.toggle(
-          "is-selected",
-          selected
-        );
-
-        option.setAttribute(
-          "aria-checked",
-          selected
-            ? "true"
-            : "false"
-        );
-
-      }
-    );
+    });
 
   }
 
 
-  /*
-   * Restore visitor's previous
-   * colour preference.
-   */
-  let savedTheme =
-    localStorage.getItem(
-      themeStorageKey
-    );
+  let savedTheme = null;
+
+  try {
+    savedTheme =
+      localStorage.getItem(
+        themeStorageKey
+      );
+  } catch {}
+
+  applyTheme(
+    themes.includes(savedTheme)
+      ? savedTheme
+      : "signal"
+  );
 
 
-  if (
-    !themes.includes(savedTheme)
-  ) {
-    savedTheme = "signal";
-  }
-
-
-  applyTheme(savedTheme);
-
-
-  /*
-   * Open colour panel.
-   */
   function openThemePanel() {
 
-    if (!themePanel) {
-      return;
-    }
+    closeMascotPanel();
+
+    if (!themePanel) return;
 
     themePanel.hidden = false;
 
@@ -162,14 +127,9 @@
   }
 
 
-  /*
-   * Close colour panel.
-   */
   function closeThemePanel() {
 
-    if (!themePanel) {
-      return;
-    }
+    if (!themePanel) return;
 
     themePanel.hidden = true;
 
@@ -181,9 +141,6 @@
   }
 
 
-  /*
-   * Theme button.
-   */
   themeToggle?.addEventListener(
     "click",
     event => {
@@ -191,62 +148,43 @@
       event.preventDefault();
       event.stopPropagation();
 
-      if (themePanel.hidden) {
-        openThemePanel();
-      } else {
+      themePanel.hidden
+        ? openThemePanel()
+        : closeThemePanel();
+
+    }
+  );
+
+
+  themeOptions.forEach(option => {
+
+    option.addEventListener(
+      "click",
+      event => {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        applyTheme(
+          option.dataset.themeOption
+        );
+
         closeThemePanel();
+
       }
+    );
 
-    }
-  );
-
-
-  /*
-   * Theme choices.
-   */
-  themeOptions.forEach(
-    option => {
-
-      option.addEventListener(
-        "click",
-        event => {
-
-          event.preventDefault();
-          event.stopPropagation();
-
-          const theme =
-            option.dataset.themeOption;
-
-          applyTheme(theme);
-
-          closeThemePanel();
-
-        }
-      );
-
-    }
-  );
+  });
 
 
-  /*
-   * Close colour panel when
-   * clicking elsewhere.
-   */
   document.addEventListener(
     "click",
     event => {
 
       if (
-        !themePanel ||
-        themePanel.hidden
-      ) {
-        return;
-      }
-
-      if (
-        !event.target.closest(
-          ".theme-control"
-        )
+        themePanel &&
+        !themePanel.hidden &&
+        !event.target.closest(".theme-control")
       ) {
         closeThemePanel();
       }
@@ -255,16 +193,11 @@
   );
 
 
-  /*
-   * Escape closes colour panel.
-   */
   document.addEventListener(
     "keydown",
     event => {
 
-      if (
-        event.key === "Escape"
-      ) {
+      if (event.key === "Escape") {
         closeThemePanel();
       }
 
@@ -272,10 +205,6 @@
   );
 
 
-  /*
-   * Keyboard navigation through
-   * colour palettes.
-   */
   themeOptions.forEach(
     (option, index) => {
 
@@ -283,33 +212,21 @@
         "keydown",
         event => {
 
-          let nextIndex =
-            index;
-
+          let nextIndex = index;
 
           if (
-            event.key ===
-              "ArrowRight" ||
-            event.key ===
-              "ArrowDown"
+            event.key === "ArrowRight" ||
+            event.key === "ArrowDown"
           ) {
-
             nextIndex =
-              (
-                index + 1
-              ) %
+              (index + 1) %
               themeOptions.length;
-
           }
 
-
           if (
-            event.key ===
-              "ArrowLeft" ||
-            event.key ===
-              "ArrowUp"
+            event.key === "ArrowLeft" ||
+            event.key === "ArrowUp"
           ) {
-
             nextIndex =
               (
                 index -
@@ -317,28 +234,18 @@
                 themeOptions.length
               ) %
               themeOptions.length;
-
           }
 
-
-          if (
-            nextIndex === index
-          ) {
+          if (nextIndex === index) {
             return;
           }
 
-
           event.preventDefault();
 
-
           const next =
-            themeOptions[
-              nextIndex
-            ];
-
+            themeOptions[nextIndex];
 
           next.focus();
-
 
           applyTheme(
             next.dataset.themeOption
@@ -356,16 +263,11 @@
      ========================================================== */
 
   const year =
-    document.getElementById(
-      "year"
-    );
-
+    document.getElementById("year");
 
   if (year) {
-
     year.textContent =
       new Date().getFullYear();
-
   }
 
 
@@ -374,9 +276,7 @@
      ========================================================== */
 
   const revealItems =
-    document.querySelectorAll(
-      ".reveal"
-    );
+    document.querySelectorAll(".reveal");
 
 
   if (
@@ -400,32 +300,25 @@
       new IntersectionObserver(
         entries => {
 
-          entries.forEach(
-            entry => {
+          entries.forEach(entry => {
 
-              if (
-                !entry.isIntersecting
-              ) {
-                return;
-              }
-
-
-              entry.target.classList.add(
-                "is-visible"
-              );
-
-
-              revealObserver.unobserve(
-                entry.target
-              );
-
+            if (!entry.isIntersecting) {
+              return;
             }
-          );
+
+            entry.target.classList.add(
+              "is-visible"
+            );
+
+            revealObserver.unobserve(
+              entry.target
+            );
+
+          });
 
         },
         {
-          threshold:.12,
-
+          threshold: .12,
           rootMargin:
             "0px 0px -8% 0px"
         }
@@ -465,7 +358,6 @@
 
     let cursorX = 0;
     let cursorY = 0;
-
     let glowFrame = 0;
 
 
@@ -479,11 +371,7 @@
         cursorY =
           event.clientY;
 
-
-        if (glowFrame) {
-          return;
-        }
-
+        if (glowFrame) return;
 
         glowFrame =
           requestAnimationFrame(
@@ -498,7 +386,6 @@
               cursorGlow.style.opacity =
                 "1";
 
-
               glowFrame = 0;
 
             }
@@ -506,7 +393,7 @@
 
       },
       {
-        passive:true
+        passive: true
       }
     );
 
@@ -524,14 +411,9 @@
     ).matches
   ) {
 
-    const magneticElements =
-      document.querySelectorAll(
-        ".magnetic"
-      );
-
-
-    magneticElements.forEach(
-      element => {
+    document
+      .querySelectorAll(".magnetic")
+      .forEach(element => {
 
         element.addEventListener(
           "pointermove",
@@ -540,30 +422,23 @@
             const rect =
               element.getBoundingClientRect();
 
-
-            const centerX =
-              rect.left +
-              rect.width / 2;
-
-
-            const centerY =
-              rect.top +
-              rect.height / 2;
-
-
             const x =
               (
                 event.clientX -
-                centerX
+                (
+                  rect.left +
+                  rect.width / 2
+                )
               ) * .08;
-
 
             const y =
               (
                 event.clientY -
-                centerY
+                (
+                  rect.top +
+                  rect.height / 2
+                )
               ) * .08;
-
 
             element.style.transform =
               `translate(${x}px, ${y}px)`;
@@ -576,14 +451,12 @@
           "pointerleave",
           () => {
 
-            element.style.transform =
-              "";
+            element.style.transform = "";
 
           }
         );
 
-      }
-    );
+      });
 
   }
 
@@ -597,40 +470,32 @@
       "[data-section]"
     );
 
-
   const navLinks =
     document.querySelectorAll(
       ".desktop-nav a"
     );
 
-
-  const navMap =
-    new Map();
+  const navMap = new Map();
 
 
-  navLinks.forEach(
-    link => {
+  navLinks.forEach(link => {
 
-      const href =
-        link.getAttribute(
-          "href"
-        );
+    const href =
+      link.getAttribute("href");
 
+    if (
+      href &&
+      href.startsWith("#")
+    ) {
 
-      if (
-        href &&
-        href.startsWith("#")
-      ) {
-
-        navMap.set(
-          href.slice(1),
-          link
-        );
-
-      }
+      navMap.set(
+        href.slice(1),
+        link
+      );
 
     }
-  );
+
+  });
 
 
   if (
@@ -641,47 +506,38 @@
       new IntersectionObserver(
         entries => {
 
-          entries.forEach(
-            entry => {
+          entries.forEach(entry => {
 
-              const link =
-                navMap.get(
-                  entry.target.id
-                );
-
-
-              if (!link) {
-                return;
-              }
-
-
-              link.classList.toggle(
-                "active",
-                entry.isIntersecting
+            const link =
+              navMap.get(
+                entry.target.id
               );
 
-            }
-          );
+            if (!link) return;
+
+            link.classList.toggle(
+              "active",
+              entry.isIntersecting
+            );
+
+          });
 
         },
         {
           rootMargin:
             "-35% 0px -55% 0px",
-
-          threshold:0
+          threshold: 0
         }
       );
 
 
-    sections.forEach(
-      section => {
+    sections.forEach(section => {
 
-        sectionObserver.observe(
-          section
-        );
+      sectionObserver.observe(
+        section
+      );
 
-      }
-    );
+    });
 
   }
 
@@ -708,9 +564,7 @@
       "scroll",
       () => {
 
-        if (parallaxFrame) {
-          return;
-        }
+        if (parallaxFrame) return;
 
 
         parallaxFrame =
@@ -723,7 +577,6 @@
                 `translateY(calc(22% + ` +
                 `${window.scrollY * .025}px))`;
 
-
               parallaxFrame = 0;
 
             }
@@ -731,7 +584,7 @@
 
       },
       {
-        passive:true
+        passive: true
       }
     );
 
@@ -739,120 +592,326 @@
 
 
   /* ==========================================================
-     08 / INTERACTIVE MASCOT
+     08 / RETRO TECH MASCOT
      ========================================================== */
-
   const mascotSystem =
-    document.getElementById(
-      "mascotSystem"
-    );
-
+    document.getElementById("mascotSystem");
 
   const mascot =
-    document.getElementById(
-      "mascot"
-    );
-
+    document.getElementById("mascot");
 
   const mascotPanel =
-    document.getElementById(
-      "mascotPanel"
-    );
-
+    document.getElementById("mascotPanel");
 
   const mascotCable =
-    document.getElementById(
-      "mascotCable"
-    );
+    document.getElementById("mascotCable");
+  const mascotDevice =
+  document.getElementById("mascotDevice");
 
+  const mascotDeviceSvg =
+    document.getElementById("mascotDeviceSvg");
+
+  const mascotDeviceName =
+    document.getElementById("mascotDeviceName") ||
+    document.getElementById("mascotDeviceState");
 
   const mascotReset =
-    document.getElementById(
-      "mascotReset"
-    );
-
+    document.getElementById("mascotReset");
 
   const mascotElasticity =
-    document.getElementById(
-      "mascotElasticity"
-    );
-
+    document.getElementById("mascotElasticity");
 
   const mascotScale =
-    document.getElementById(
-      "mascotScale"
-    );
-
+    document.getElementById("mascotScale");
 
   const mascotElasticityValue =
     document.getElementById(
       "mascotElasticityValue"
     );
 
-
   const mascotScaleValue =
     document.getElementById(
       "mascotScaleValue"
     );
 
-
-  const mascotOptions =
-    document.querySelectorAll(
-      "[data-mascot-body]," +
-      "[data-mascot-sensor]," +
-      "[data-mascot-mood]," +
-      "[data-mascot-accessory]"
-    );
-
-
   const mascotStorageKey =
     "portfolio-mascot";
 
 
-  /*
-   * Default mascot.
-   */
-  const mascotDefaults = {
+  /* ==========================================================
+     MASCOT DEVICES
+     ========================================================== */
 
-    body:"capsule",
+  const mascotDevices = {
 
-    sensor:"dot",
+    telephone: {
+      label: "TELEPHONE",
 
-    mood:"neutral",
+      svg: `
+        <g
+          fill="none"
+          stroke="currentColor"
+          stroke-width="5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
 
-    accessory:"antenna",
+          <path d="
+            M52 42
+            C48 30 51 20 63 15
+            L82 26
+            L73 43
+            C83 61 99 77 118 87
+            L136 78
+            L148 98
+            C141 111 128 115 116 110
+            C82 97 56 70 52 42
+          "/>
 
-    elasticity:2,
+          <path d="M63 20 L82 31"/>
+          <path d="M136 84 L119 94"/>
 
-    scale:2
+          <circle
+            cx="102"
+            cy="111"
+            r="15"
+          />
+
+          <circle
+            cx="102"
+            cy="111"
+            r="4"
+          />
+
+          <path d="
+            M102 96 V102
+            M87 111 H93
+            M111 111 H117
+            M102 120 V126
+          "/>
+
+        </g>
+      `
+    },
+
+
+    computer: {
+      label: "COMPUTER",
+
+      svg: `
+        <g
+          fill="none"
+          stroke="currentColor"
+          stroke-width="5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+
+          <rect
+            x="24"
+            y="18"
+            width="128"
+            height="80"
+            rx="7"
+          />
+
+          <rect
+            x="39"
+            y="32"
+            width="98"
+            height="48"
+            rx="2"
+          />
+
+          <path d="M50 46 H66"/>
+          <path d="M50 57 H82"/>
+          <path d="M50 68 H61"/>
+
+          <path d="M68 112 H108"/>
+          <path d="M78 98 V112"/>
+          <path d="M98 98 V112"/>
+
+          <rect
+            x="166"
+            y="45"
+            width="32"
+            height="67"
+            rx="3"
+          />
+
+          <path d="M174 59 H190"/>
+          <path d="M174 70 H190"/>
+          <path d="M174 81 H185"/>
+
+          <circle
+            cx="182"
+            cy="98"
+            r="3"
+          />
+
+        </g>
+      `
+    },
+
+
+    pager: {
+      label: "PAGER",
+
+      svg: `
+        <g
+          fill="none"
+          stroke="currentColor"
+          stroke-width="5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+
+          <rect
+            x="72"
+            y="10"
+            width="76"
+            height="130"
+            rx="10"
+          />
+
+          <rect
+            x="84"
+            y="30"
+            width="52"
+            height="30"
+            rx="2"
+          />
+
+          <path d="M90 42 H116"/>
+          <path d="M90 51 H109"/>
+
+          <circle
+            cx="96"
+            cy="82"
+            r="6"
+          />
+
+          <path d="M112 76 H135"/>
+          <path d="M112 88 H130"/>
+          <path d="M86 110 H134"/>
+          <path d="M148 36 H162"/>
+
+        </g>
+      `
+    },
+
+
+    keyboard: {
+      label: "KEYBOARD",
+
+      svg: `
+        <g
+          fill="none"
+          stroke="currentColor"
+          stroke-width="5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+
+          <path d="
+            M18 43
+            L42 21
+            H178
+            L202 43
+            L187 111
+            H33
+            Z
+          "/>
+
+          <path d="M43 47 H177"/>
+
+          <path d="M47 59 V68"/>
+          <path d="M63 59 V68"/>
+          <path d="M79 59 V68"/>
+          <path d="M95 59 V68"/>
+          <path d="M111 59 V68"/>
+          <path d="M127 59 V68"/>
+          <path d="M143 59 V68"/>
+          <path d="M159 59 V68"/>
+
+          <path d="M47 80 V89"/>
+          <path d="M64 80 V89"/>
+          <path d="M81 80 V89"/>
+          <path d="M98 80 V89"/>
+          <path d="M115 80 V89"/>
+          <path d="M132 80 V89"/>
+          <path d="M149 80 V89"/>
+          <path d="M166 80 V89"/>
+
+          <path d="M68 101 H152"/>
+
+        </g>
+      `
+    },
+
+
+    mouse: {
+      label: "MOUSE",
+
+      svg: `
+        <g
+          fill="none"
+          stroke="currentColor"
+          stroke-width="5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+
+          <path d="
+            M74 27
+            C74 14 84 5 96 5
+            H124
+            C136 5 146 14 146 27
+            V92
+            C146 113 131 128 110 128
+            C89 128 74 113 74 92
+            Z
+          "/>
+
+          <path d="M110 6 V42"/>
+          <path d="M96 42 H124"/>
+          <path d="M110 48 V62"/>
+          <path d="M110 128 V143"/>
+
+        </g>
+      `
+    }
 
   };
 
 
-  /*
-   * Valid choices.
-   */
+  /* ==========================================================
+     MASCOT OPTIONS
+     ========================================================== */
+
   const mascotChoices = {
 
-    body:[
-      "capsule",
-      "orb",
-      "block"
+    body: [
+      "telephone",
+      "computer",
+      "pager",
+      "keyboard",
+      "mouse"
     ],
 
-    sensor:[
+    sensor: [
       "dot",
       "radar",
       "scan"
     ],
 
-    mood:[
+    mood: [
       "neutral",
       "curious",
       "alert"
     ],
 
-    accessory:[
+    accessory: [
       "antenna",
       "module",
       "none"
@@ -861,72 +920,73 @@
   };
 
 
-  /*
-   * Validate a mascot value.
-   */
-  function validMascotValue(
-    group,
+  const mascotDefaults = {
+
+    body: "telephone",
+
+    sensor: "dot",
+
+    mood: "neutral",
+
+    accessory: "antenna",
+
+    elasticity: 2,
+
+    scale: 2
+
+  };
+
+
+  /* ==========================================================
+     MASCOT OPTION HELPERS
+     ========================================================== */
+
+  function mascotValueIsValid(
+    type,
     value
   ) {
 
-    return (
-      mascotChoices[group] &&
-      mascotChoices[group].includes(
-        value
-      )
+    return Boolean(
+      mascotChoices[type] &&
+      mascotChoices[type].includes(value)
     );
 
   }
 
 
-  /*
-   * Get the data attribute
-   * belonging to an option.
-   */
   function getMascotOptionType(
     option
   ) {
 
-    if (
-      option.dataset.mascotBody
-    ) {
+    if (option.dataset.mascotBody) {
       return "body";
     }
 
-
-    if (
-      option.dataset.mascotSensor
-    ) {
+    if (option.dataset.mascotSensor) {
       return "sensor";
     }
 
-
-    if (
-      option.dataset.mascotMood
-    ) {
+    if (option.dataset.mascotMood) {
       return "mood";
     }
 
-
-    if (
-      option.dataset.mascotAccessory
-    ) {
+    if (option.dataset.mascotAccessory) {
       return "accessory";
     }
-
 
     return null;
 
   }
 
 
-  /*
-   * Get option value.
-   */
   function getMascotOptionValue(
     option,
     type
   ) {
+
+    if (!type) {
+      return null;
+    }
 
     const key =
       `mascot${
@@ -935,30 +995,32 @@
         type.slice(1)
       }`;
 
-
-    return option.dataset[key];
+    return option.dataset[key] || null;
 
   }
 
 
-  /*
-   * Update option states.
-   */
   function updateMascotOptionStates() {
 
-    mascotOptions.forEach(
-      option => {
+    if (!mascotPanel || !mascotSystem) {
+      return;
+    }
+
+    mascotPanel
+      .querySelectorAll(
+        "[data-mascot-body]," +
+        "[data-mascot-sensor]," +
+        "[data-mascot-mood]," +
+        "[data-mascot-accessory]"
+      )
+      .forEach(option => {
 
         const type =
-          getMascotOptionType(
-            option
-          );
-
+          getMascotOptionType(option);
 
         if (!type) {
           return;
         }
-
 
         const value =
           getMascotOptionValue(
@@ -966,34 +1028,362 @@
             type
           );
 
-
         const selected =
           value ===
           mascotSystem.dataset[type];
-
 
         option.classList.toggle(
           "is-selected",
           selected
         );
 
-
         option.setAttribute(
           "aria-checked",
-          selected
-            ? "true"
-            : "false"
+          selected ? "true" : "false"
         );
 
-      }
+      });
+
+  }
+
+
+  /* ==========================================================
+     MASCOT SVG DECORATIONS
+     ========================================================== */
+
+  function createSvgElement(
+    name,
+    attributes = {}
+  ) {
+
+    const element =
+      document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        name
+      );
+
+    Object.entries(attributes)
+      .forEach(
+        ([key, value]) => {
+
+          element.setAttribute(
+            key,
+            value
+          );
+
+        }
+      );
+
+    return element;
+
+  }
+
+
+  function renderMascotDecorations() {
+
+    if (
+      !mascotDeviceSvg ||
+      !mascotSystem
+    ) {
+      return;
+    }
+
+    mascotDeviceSvg
+      .querySelector(
+        ".mascot-decorations"
+      )
+      ?.remove();
+
+    const group =
+      createSvgElement(
+        "g",
+        {
+          class:
+            "mascot-decorations",
+
+          fill:
+            "none",
+
+          stroke:
+            "currentColor",
+
+          "stroke-width":
+            "3",
+
+          "stroke-linecap":
+            "round",
+
+          "stroke-linejoin":
+            "round"
+        }
+      );
+
+
+    const sensor =
+      mascotSystem.dataset.sensor;
+
+    const mood =
+      mascotSystem.dataset.mood;
+
+    const accessory =
+      mascotSystem.dataset.accessory;
+
+
+    /* Sensor */
+
+    if (sensor === "dot") {
+
+      group.appendChild(
+        createSvgElement(
+          "circle",
+          {
+            cx: "188",
+            cy: "22",
+            r: "4",
+            fill: "currentColor",
+            stroke: "none"
+          }
+        )
+      );
+
+    }
+
+
+    if (sensor === "radar") {
+
+      group.appendChild(
+        createSvgElement(
+          "path",
+          {
+            d:
+              "M176 34 Q190 20 204 34"
+          }
+        )
+      );
+
+      group.appendChild(
+        createSvgElement(
+          "circle",
+          {
+            cx: "190",
+            cy: "38",
+            r: "3"
+          }
+        )
+      );
+
+    }
+
+
+    if (sensor === "scan") {
+
+      group.appendChild(
+        createSvgElement(
+          "path",
+          {
+            d:
+              "M174 26 H204 " +
+              "M178 32 H198 " +
+              "M182 38 H194"
+          }
+        )
+      );
+
+    }
+
+
+    /* Accessory */
+
+    if (accessory === "antenna") {
+
+      group.appendChild(
+        createSvgElement(
+          "path",
+          {
+            d:
+              "M182 14 V3"
+          }
+        )
+      );
+
+      group.appendChild(
+        createSvgElement(
+          "circle",
+          {
+            cx: "182",
+            cy: "3",
+            r: "3",
+            fill: "currentColor",
+            stroke: "none"
+          }
+        )
+      );
+
+    }
+
+
+    if (accessory === "module") {
+
+      group.appendChild(
+        createSvgElement(
+          "rect",
+          {
+            x: "174",
+            y: "8",
+            width: "20",
+            height: "13",
+            rx: "2"
+          }
+        )
+      );
+
+    }
+
+
+    /* Mood */
+
+    if (mood === "curious") {
+
+      group.appendChild(
+        createSvgElement(
+          "path",
+          {
+            d:
+              "M196 104 Q202 98 208 104"
+          }
+        )
+      );
+
+    }
+
+
+    if (mood === "alert") {
+
+      group.appendChild(
+        createSvgElement(
+          "path",
+          {
+            d:
+              "M194 94 V104 " +
+              "M202 94 V104"
+          }
+        )
+      );
+
+    }
+
+
+    mascotDeviceSvg.appendChild(
+      group
     );
 
   }
 
 
-  /*
-   * Update slider labels.
-   */
+  /* ==========================================================
+     RENDER MASCOT DEVICE
+     ========================================================== */
+
+  function updateMascotDevice() {
+
+    if (
+      !mascotDeviceSvg ||
+      !mascotSystem
+    ) {
+      return;
+    }
+
+    let body =
+      mascotSystem.dataset.body;
+
+    if (
+      !mascotValueIsValid(
+        "body",
+        body
+      )
+    ) {
+      body =
+        mascotDefaults.body;
+    }
+
+    let sensor =
+      mascotSystem.dataset.sensor;
+
+    if (
+      !mascotValueIsValid(
+        "sensor",
+        sensor
+      )
+    ) {
+      sensor =
+        mascotDefaults.sensor;
+    }
+
+    let mood =
+      mascotSystem.dataset.mood;
+
+    if (
+      !mascotValueIsValid(
+        "mood",
+        mood
+      )
+    ) {
+      mood =
+        mascotDefaults.mood;
+    }
+
+    let accessory =
+      mascotSystem.dataset.accessory;
+
+    if (
+      !mascotValueIsValid(
+        "accessory",
+        accessory
+      )
+    ) {
+      accessory =
+        mascotDefaults.accessory;
+    }
+
+
+    mascotSystem.dataset.body =
+      body;
+
+    mascotSystem.dataset.sensor =
+      sensor;
+
+    mascotSystem.dataset.mood =
+      mood;
+
+    mascotSystem.dataset.accessory =
+      accessory;
+
+
+    mascotDeviceSvg.innerHTML =
+      mascotDevices[body].svg;
+
+
+    mascotDeviceSvg.style.color =
+      "var(--accent)";
+
+
+    if (mascotDeviceName) {
+
+      mascotDeviceName.textContent =
+        mascotDevices[body].label;
+
+    }
+
+
+    renderMascotDecorations();
+
+  }
+
+
+  /* ==========================================================
+     MASCOT LABELS
+     ========================================================== */
+
   function updateMascotLabels() {
 
     const elasticityLabels = [
@@ -1002,87 +1392,110 @@
       "SPRING"
     ];
 
-
     const scaleLabels = [
       "TINY",
       "DEFAULT",
       "LARGE"
     ];
 
-
     const elasticity =
       Number(
-        mascotElasticity.value
+        mascotElasticity?.value || 2
       );
-
 
     const scale =
       Number(
-        mascotScale.value
+        mascotScale?.value || 2
       );
 
 
-    mascotElasticityValue.textContent =
-      elasticityLabels[
-        elasticity - 1
+    if (mascotElasticityValue) {
+
+      mascotElasticityValue.textContent =
+        elasticityLabels[
+          elasticity - 1
+        ] || "DEFAULT";
+
+    }
+
+
+    if (mascotScaleValue) {
+
+      mascotScaleValue.textContent =
+        scaleLabels[
+          scale - 1
+        ] || "DEFAULT";
+
+    }
+
+
+    if (mascotSystem) {
+
+      const scales = [
+        .82,
+        1,
+        1.18
       ];
 
+      mascotSystem.style.setProperty(
+        "--mascot-scale",
+        scales[scale - 1] || 1
+      );
 
-    mascotScaleValue.textContent =
-      scaleLabels[
-        scale - 1
-      ];
-
-
-    const scaleValues = [
-      .82,
-      1,
-      1.18
-    ];
-
-
-    mascotSystem.style.setProperty(
-      "--mascot-scale",
-      scaleValues[
-        scale - 1
-      ]
-    );
+    }
 
   }
+  function updateMascotInstruments() {
+    [mascotElasticity, mascotScale].forEach(slider => {
+      if (!slider) return;
 
+      const value = Number(slider.value || 2);
+      const min = Number(slider.min || 1);
+      const max = Number(slider.max || 3);
+      const pct = ((value - min) / (max - min)) * 100;
 
-  /*
-   * Save mascot state.
-   */
+      slider.style.setProperty("--slider-progress", `${pct}%`);
+    });
+  }
+
+  /* ==========================================================
+     MASCOT STORAGE
+     ========================================================== */
+
   function saveMascotConfig() {
 
     if (!mascotSystem) {
       return;
     }
 
-
     const config = {
 
       body:
-        mascotSystem.dataset.body,
+        mascotSystem.dataset.body ||
+        mascotDefaults.body,
 
       sensor:
-        mascotSystem.dataset.sensor,
+        mascotSystem.dataset.sensor ||
+        mascotDefaults.sensor,
 
       mood:
-        mascotSystem.dataset.mood,
+        mascotSystem.dataset.mood ||
+        mascotDefaults.mood,
 
       accessory:
-        mascotSystem.dataset.accessory,
+        mascotSystem.dataset.accessory ||
+        mascotDefaults.accessory,
 
       elasticity:
         Number(
-          mascotElasticity.value
+          mascotElasticity?.value ||
+          mascotDefaults.elasticity
         ),
 
       scale:
         Number(
-          mascotScale.value
+          mascotScale?.value ||
+          mascotDefaults.scale
         )
 
     };
@@ -1095,21 +1508,11 @@
         JSON.stringify(config)
       );
 
-    } catch {
-
-      /*
-       * localStorage may be blocked
-       * in privacy-restricted contexts.
-       */
-
-    }
+    } catch {}
 
   }
 
 
-  /*
-   * Load mascot state.
-   */
   function loadMascotConfig() {
 
     try {
@@ -1119,21 +1522,44 @@
           mascotStorageKey
         );
 
-
       if (!stored) {
-        return mascotDefaults;
+        return {
+          ...mascotDefaults
+        };
       }
-
 
       const parsed =
         JSON.parse(stored);
-
 
       if (
         !parsed ||
         typeof parsed !== "object"
       ) {
-        return mascotDefaults;
+        return {
+          ...mascotDefaults
+        };
+      }
+
+
+      /*
+       * Migrate values from the older
+       * mascot prototype.
+       */
+
+      const oldBodies = [
+        "capsule",
+        "orb",
+        "block"
+      ];
+
+
+      if (
+        oldBodies.includes(
+          parsed.body
+        )
+      ) {
+        parsed.body =
+          mascotDefaults.body;
       }
 
 
@@ -1144,29 +1570,26 @@
 
     } catch {
 
-      return mascotDefaults;
+      return {
+        ...mascotDefaults
+      };
 
     }
 
   }
 
 
-  /*
-   * Apply mascot configuration.
-   */
   function applyMascotConfig(
     config
   ) {
 
-    if (
-      !mascotSystem
-    ) {
+    if (!mascotSystem) {
       return;
     }
 
 
     const body =
-      validMascotValue(
+      mascotValueIsValid(
         "body",
         config.body
       )
@@ -1175,7 +1598,7 @@
 
 
     const sensor =
-      validMascotValue(
+      mascotValueIsValid(
         "sensor",
         config.sensor
       )
@@ -1184,7 +1607,7 @@
 
 
     const mood =
-      validMascotValue(
+      mascotValueIsValid(
         "mood",
         config.mood
       )
@@ -1193,7 +1616,7 @@
 
 
     const accessory =
-      validMascotValue(
+      mascotValueIsValid(
         "accessory",
         config.accessory
       )
@@ -1202,91 +1625,74 @@
 
 
     const elasticity =
-      [1,2,3].includes(
-        Number(
-          config.elasticity
-        )
+      [1, 2, 3].includes(
+        Number(config.elasticity)
       )
-        ? Number(
-            config.elasticity
-          )
+        ? Number(config.elasticity)
         : mascotDefaults.elasticity;
 
 
     const scale =
-      [1,2,3].includes(
-        Number(
-          config.scale
-        )
+      [1, 2, 3].includes(
+        Number(config.scale)
       )
-        ? Number(
-            config.scale
-          )
+        ? Number(config.scale)
         : mascotDefaults.scale;
 
 
     mascotSystem.dataset.body =
       body;
 
-
     mascotSystem.dataset.sensor =
       sensor;
 
-
     mascotSystem.dataset.mood =
       mood;
-
 
     mascotSystem.dataset.accessory =
       accessory;
 
 
-    mascotElasticity.value =
-      elasticity;
+    if (mascotElasticity) {
+
+      mascotElasticity.value =
+        elasticity;
+
+    }
 
 
-    mascotScale.value =
-      scale;
+    if (mascotScale) {
+
+      mascotScale.value =
+        scale;
+
+    }
 
 
+    updateMascotDevice();
     updateMascotOptionStates();
-
     updateMascotLabels();
-
-    saveMascotConfig();
-
-  }
-
-
-  /*
-   * Initialize mascot.
-   */
-  if (
-    mascotSystem &&
-    mascot
-  ) {
-
-    applyMascotConfig(
-      loadMascotConfig()
-    );
 
   }
 
 
   /* ==========================================================
-     09 / MASCOT PANEL
+     MASCOT PANEL
      ========================================================== */
 
   function openMascotPanel() {
 
-    if (!mascotPanel) {
+    closeThemePanel();
+
+    if (
+      !mascotPanel ||
+      !mascot
+    ) {
       return;
     }
 
-
     mascotPanel.hidden =
       false;
-
 
     mascot.setAttribute(
       "aria-expanded",
@@ -1298,14 +1704,15 @@
 
   function closeMascotPanel() {
 
-    if (!mascotPanel) {
+    if (
+      !mascotPanel ||
+      !mascot
+    ) {
       return;
     }
 
-
     mascotPanel.hidden =
       true;
-
 
     mascot.setAttribute(
       "aria-expanded",
@@ -1315,60 +1722,53 @@
   }
 
 
-  /*
-   * Mascot click opens customizer.
-   *
-   * A dragged mascot sets "was-dragged"
-   * so releasing it doesn't accidentally
-   * open the panel.
-   */
-let mascotWasDragged = false;
+  /* ==========================================================
+     MASCOT CLICK
+     ========================================================== */
 
-mascot?.addEventListener(
-  "click",
-  event => {
+  let mascotWasDragged =
+    false;
 
-    event.preventDefault();
-    event.stopPropagation();
 
-    if (mascotWasDragged) {
+  mascot?.addEventListener(
+    "click",
+    event => {
 
-      mascotWasDragged = false;
+      event.preventDefault();
+      event.stopPropagation();
 
-      return;
+      if (mascotWasDragged) {
+
+        mascotWasDragged =
+          false;
+
+        return;
+
+      }
+
+      if (!mascotPanel) {
+        return;
+      }
+
+      mascotPanel.hidden
+        ? openMascotPanel()
+        : closeMascotPanel();
 
     }
-
-    if (!mascotPanel) {
-      return;
-    }
-
-    if (mascotPanel.hidden) {
-      openMascotPanel();
-    } else {
-      closeMascotPanel();
-    }
-
-  }
-);
+  );
 
 
-  /*
-   * Click outside closes mascot panel.
-   */
+  /* ==========================================================
+     CLOSE OUTSIDE / ESCAPE
+     ========================================================== */
+
   document.addEventListener(
     "click",
     event => {
 
       if (
-        !mascotPanel ||
-        mascotPanel.hidden
-      ) {
-        return;
-      }
-
-
-      if (
+        mascotPanel &&
+        !mascotPanel.hidden &&
         !event.target.closest(
           "#mascotSystem"
         )
@@ -1382,19 +1782,12 @@ mascot?.addEventListener(
   );
 
 
-  /*
-   * Escape closes mascot panel.
-   */
   document.addEventListener(
     "keydown",
     event => {
 
-      if (
-        event.key === "Escape"
-      ) {
-
+      if (event.key === "Escape") {
         closeMascotPanel();
-
       }
 
     }
@@ -1402,83 +1795,138 @@ mascot?.addEventListener(
 
 
   /* ==========================================================
-     10 / MASCOT CUSTOMIZATION
+     MASCOT OPTIONS
      ========================================================== */
 
-  mascotOptions.forEach(
-    option => {
+  mascotPanel?.addEventListener(
+    "click",
+    event => {
 
-      option.addEventListener(
-        "click",
-        event => {
+      const option =
+        event.target.closest(
+          "[data-mascot-body]," +
+          "[data-mascot-sensor]," +
+          "[data-mascot-mood]," +
+          "[data-mascot-accessory]"
+        );
 
-          event.preventDefault();
+      if (!option) {
+        return;
+      }
 
-          event.stopPropagation();
-
-
-          const type =
-            getMascotOptionType(
-              option
-            );
-
-
-          const value =
-            getMascotOptionValue(
-              option,
-              type
-            );
+      event.preventDefault();
+      event.stopPropagation();
 
 
-          if (
-            !type ||
-            !validMascotValue(
-              type,
-              value
-            )
-          ) {
-            return;
-          }
+      const type =
+        getMascotOptionType(
+          option
+        );
+
+      const value =
+        getMascotOptionValue(
+          option,
+          type
+        );
 
 
-          mascotSystem.dataset[type] =
-            value;
+      if (
+        !type ||
+        !mascotValueIsValid(
+          type,
+          value
+        )
+      ) {
+        return;
+      }
 
 
-          updateMascotOptionStates();
-
-          saveMascotConfig();
-
-        }
-      );
-
-    }
-  );
+      mascotSystem.dataset[type] =
+        value;
 
 
-  /*
-   * Elasticity slider.
-   */
-  mascotElasticity?.addEventListener(
-    "input",
-    () => {
+      /*
+       * This is the important path:
+       *
+       * option
+       *   ↓
+       * dataset
+       *   ↓
+       * SVG
+       */
 
-      updateMascotLabels();
-
+      updateMascotDevice();
+      updateMascotOptionStates();
       saveMascotConfig();
 
     }
   );
 
 
-  /*
-   * Size slider.
-   */
+  /* ==========================================================
+     SLIDERS
+     ========================================================== */
+
+mascotElasticity?.addEventListener(
+  "input",
+  () => {
+
+    updateMascotLabels();
+    updateMascotInstruments();
+    saveMascotConfig();
+
+    /*
+     * If the mascot is currently at rest, there is no animation
+     * frame running. Restart it so changing elasticity immediately
+     * affects the next spring movement.
+     */
+    if (typeof startSpring === "function") {
+      startSpring();
+    }
+
+  }
+);
+
+
+mascotScale?.addEventListener(
+  "input",
+  () => {
+
+    updateMascotLabels();
+
+    updateMascotInstruments();
+
+    saveMascotConfig();
+
+  }
+);
+
+
   mascotScale?.addEventListener(
     "input",
     () => {
 
       updateMascotLabels();
+      saveMascotConfig();
+
+    }
+  );
+
+
+  /* ==========================================================
+     RESET
+     ========================================================== */
+
+  mascotReset?.addEventListener(
+    "click",
+    event => {
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      applyMascotConfig(
+        mascotDefaults
+      );
 
       saveMascotConfig();
 
@@ -1486,349 +1934,231 @@ mascot?.addEventListener(
   );
 
 
-  /*
-   * Reset.
-   */
-  mascotReset?.addEventListener(
-    "click",
-    event => {
-
-      event.preventDefault();
-
-      event.stopPropagation();
-
-
-      applyMascotConfig(
-        mascotDefaults
-      );
-
-    }
-  );
-
-
   /* ==========================================================
-     11 / MASCOT ELASTIC PHYSICS
+     INITIALIZE
      ========================================================== */
+
+  if (mascotSystem) {
+
+    applyMascotConfig(
+      loadMascotConfig()
+    );
+    updateMascotInstruments();
+    saveMascotConfig();
+
+  }
+  /* ==========================================================
+     MASCOT SPRING PHYSICS
+     ========================================================== */
+
 
   if (
     mascot &&
+    mascotDevice &&
     mascotSystem &&
+    mascotCable &&
     !reduced
   ) {
 
     let dragging = false;
-
     let pointerId = null;
-
 
     let targetX = 0;
     let targetY = 0;
 
-
-    let currentX = 0;
-    let currentY = 0;
-
+    let x = 0;
+    let y = 0;
 
     let velocityX = 0;
     let velocityY = 0;
 
+    let frame = 0;
 
-    let physicsFrame = 0;
-
-
-    /*
-     * Maximum distance the mascot
-     * can be pulled.
-     */
+    const anchorToDevice = 87;
     const maxPull = 145;
 
 
-    /*
-     * Physics profiles.
-     */
-    function getPhysics() {
+    function startSpring() {
 
-      const setting =
-        Number(
-          mascotElasticity.value
-        );
-
-
-      if (
-        setting === 1
-      ) {
-
-        return {
-          spring:.055,
-          damping:.72
-        };
-
+      if (!frame) {
+        frame =
+          requestAnimationFrame(
+            animateSpring
+          );
       }
-
-
-      if (
-        setting === 3
-      ) {
-
-        return {
-          spring:.105,
-          damping:.76
-        };
-
-      }
-
-
-      return {
-        spring:.08,
-        damping:.74
-      };
 
     }
 
 
-    /*
-     * Keep a vector within
-     * the maximum pull distance.
-     */
     function limitPull(
-      x,
-      y
+      xValue,
+      yValue
     ) {
 
       const distance =
-        Math.sqrt(
-          x * x +
-          y * y
+        Math.hypot(
+          xValue,
+          yValue
         );
-
 
       if (
         distance <= maxPull
       ) {
-
         return {
-          x,
-          y
+          x: xValue,
+          y: yValue
         };
-
       }
 
-
       const factor =
-        maxPull /
-        distance;
-
+        maxPull / distance;
 
       return {
-        x:x * factor,
-        y:y * factor
+        x: xValue * factor,
+        y: yValue * factor
       };
 
     }
 
 
-    /*
-     * Render mascot and cable.
-     */
-    function renderMascot() {
+    function updateSpringVisual() {
+      const deviceTransform =
+        `translate(calc(-50% + ${x}px), ${y}px) ` +
+        `scale(var(--mascot-scale,1))`;
 
-      if (
-        !mascot ||
-        !mascotCable
-      ) {
-        return;
-      }
+      mascotDevice.style.transform = deviceTransform;
+      mascot.style.transform = "translateX(-50%)";
 
+      const vertical = anchorToDevice + y;
+      const length = Math.max(20, Math.hypot(x, vertical));
 
       const angle =
-        Math.atan2(
-          currentX,
-          96 + currentY
-        ) *
-        180 /
-        Math.PI;
+        Math.atan2(x, vertical) * 180 / Math.PI;
 
+      mascotCable.style.height = `${length}px`;
+      mascotCable.style.transform =
+        `translateX(-50%) rotate(${angle}deg)`;
+    }
 
-      const cableLength =
-        Math.max(
-          20,
+    function animateSpring() {
 
-          Math.min(
-            170,
-
-            Math.sqrt(
-              currentX *
-                currentX +
-
-              (
-                96 +
-                currentY
-              ) *
-              (
-                96 +
-                currentY
-              )
-            )
-          )
+      const elasticity =
+        Number(
+          mascotElasticity?.value || 2
         );
 
 
-      mascot.style.transform =
-        `translate(` +
-        `calc(-50% + ${currentX}px),` +
-        `${currentY}px)` +
-        `scale(var(--mascot-scale, 1))` +
-        `rotate(${angle * .18}deg)`;
+      let spring = .08;
+      let damping = .74;
 
+      if (elasticity === 1) {
+        spring = .045;
+        damping = .64;
+      }
 
-      mascotCable.style.height =
-        `${cableLength}px`;
-
-
-      mascotCable.style.transform =
-        `translateX(-50%) ` +
-        `rotate(${angle}deg)`;
-
-    }
-
-
-    /*
-     * Start physics loop.
-     */
-    function startMascotPhysics() {
-
-      if (
-        physicsFrame
-      ) {
-        return;
+      if (elasticity === 3) {
+        spring = .14;
+        damping = .84;
       }
 
 
-      physicsFrame =
-        requestAnimationFrame(
-          mascotPhysics
-        );
-
-    }
-
-
-    /*
-     * Physics loop.
-     */
-    function mascotPhysics() {
-
-      const physics =
-        getPhysics();
-
-
-      if (
-        dragging
-      ) {
+      if (dragging) {
 
         velocityX +=
-          (
-            targetX -
-            currentX
-          ) *
-          .28;
-
+          (targetX - x) * .28;
 
         velocityY +=
-          (
-            targetY -
-            currentY
-          ) *
-          .28;
+          (targetY - y) * .28;
 
       } else {
 
         velocityX +=
-          (
-            -currentX
-          ) *
-          physics.spring;
-
+          -x * spring;
 
         velocityY +=
-          (
-            -currentY
-          ) *
-          physics.spring;
+          -y * spring;
 
       }
 
 
-      velocityX *=
-        physics.damping;
+      velocityX *= damping;
+      velocityY *= damping;
+
+      x += velocityX;
+      y += velocityY;
 
 
-      velocityY *=
-        physics.damping;
+      updateSpringVisual();
 
 
-      currentX +=
-        velocityX;
-
-
-      currentY +=
-        velocityY;
-
-
-      renderMascot();
-
-
-      /*
-       * Once released, stop when
-       * the system has settled.
-       */
       if (
         !dragging &&
-
-        Math.abs(currentX) < .05 &&
-
-        Math.abs(currentY) < .05 &&
-
+        Math.abs(x) < .05 &&
+        Math.abs(y) < .05 &&
         Math.abs(velocityX) < .05 &&
-
         Math.abs(velocityY) < .05
       ) {
 
-        currentX = 0;
-        currentY = 0;
+        x = 0;
+        y = 0;
 
         velocityX = 0;
         velocityY = 0;
 
-        renderMascot();
+        frame = 0;
 
-        physicsFrame = 0;
+        updateSpringVisual();
 
         return;
 
       }
 
 
-      physicsFrame =
+      frame =
         requestAnimationFrame(
-          mascotPhysics
+          animateSpring
         );
 
     }
 
 
-    /*
-     * Pointer down.
-     */
+    function getPointerOffset(
+      event
+    ) {
+
+      const rect =
+        mascotSystem.getBoundingClientRect();
+
+
+      return limitPull(
+
+        event.clientX -
+          (
+            rect.left +
+            rect.width / 2
+          ),
+
+        event.clientY -
+          (
+            rect.top +
+            91
+          )
+
+      );
+
+    }
+
+
     mascot.addEventListener(
       "pointerdown",
       event => {
 
         event.preventDefault();
-
         event.stopPropagation();
 
-
         dragging = true;
+
+        mascotWasDragged = false;
 
         pointerId =
           event.pointerId;
@@ -1839,70 +2169,31 @@ mascot?.addEventListener(
         );
 
 
-        /*
-         * Capture pointer so dragging
-         * continues even if the cursor
-         * briefly leaves the mascot.
-         */
         try {
 
           mascot.setPointerCapture(
             pointerId
           );
 
-        } catch {
-          /* Ignore unsupported capture. */
-        }
+        } catch {}
 
+
+        const offset =
+          getPointerOffset(event);
+
+
+        targetX = offset.x;
+        targetY = offset.y;
 
         velocityX = 0;
         velocityY = 0;
 
-
-        const rect =
-          mascotSystem.getBoundingClientRect();
-
-
-        const rawX =
-          event.clientX -
-          (
-            rect.left +
-            rect.width / 2
-          );
-
-
-        const rawY =
-          event.clientY -
-          (
-            rect.top +
-            96
-          );
-
-
-        const limited =
-          limitPull(
-            rawX,
-            rawY
-          );
-
-
-        targetX =
-          limited.x;
-
-
-        targetY =
-          limited.y;
-
-
-        startMascotPhysics();
+        startSpring();
 
       }
     );
 
 
-    /*
-     * Pointer movement.
-     */
     mascot.addEventListener(
       "pointermove",
       event => {
@@ -1915,65 +2206,42 @@ mascot?.addEventListener(
         }
 
 
-        const rect =
-          mascotSystem.getBoundingClientRect();
+        const offset =
+          getPointerOffset(event);
 
 
-        const rawX =
-          event.clientX -
-          (
-            rect.left +
-            rect.width / 2
-          );
+        targetX = offset.x;
+        targetY = offset.y;
 
 
-        const rawY =
-          event.clientY -
-          (
-            rect.top +
-            96
-          );
+        if (
+          Math.abs(targetX) > 4 ||
+          Math.abs(targetY) > 4
+        ) {
+
+          mascotWasDragged = true;
+
+        }
 
 
-        const limited =
-          limitPull(
-            rawX,
-            rawY
-          );
-
-
-        targetX =
-          limited.x;
-
-
-        targetY =
-          limited.y;
-
-
-        startMascotPhysics();
+        startSpring();
 
       }
     );
 
 
-    /*
-     * Release mascot.
-     */
     function releaseMascot(
       event
     ) {
 
-      if (
-        !dragging
-      ) {
+      if (!dragging) {
         return;
       }
 
 
       if (
         event &&
-        event.pointerId !==
-          pointerId
+        event.pointerId !== pointerId
       ) {
         return;
       }
@@ -1981,18 +2249,12 @@ mascot?.addEventListener(
 
       dragging = false;
 
-
       mascotSystem.classList.remove(
         "is-dragging"
       );
 
 
-      mascotSystem.classList.add(
-        "was-dragged"
-      );
-
-
-      startMascotPhysics();
+      startSpring();
 
     }
 
@@ -2002,43 +2264,75 @@ mascot?.addEventListener(
       releaseMascot
     );
 
-
     mascot.addEventListener(
       "pointercancel",
       releaseMascot
     );
 
-  }
-
-
-  /* ==========================================================
-     12 / REDUCED MOTION FALLBACK
-     ========================================================== */
-
-  if (
-    reduced &&
-    mascot
-  ) {
-
-    /*
-     * Mascot remains completely usable
-     * as a customization control, but
-     * no physics animation is run.
-     */
     mascot.addEventListener(
-      "pointerdown",
-      event => {
+      "lostpointercapture",
+      () => {
 
-        event.stopPropagation();
+        if (!dragging) {
+          return;
+        }
+
+        dragging = false;
+
+        mascotSystem.classList.remove(
+          "is-dragging"
+        );
+
+        startSpring();
 
       }
     );
 
+
+    updateSpringVisual();
+
   }
 
 
   /* ==========================================================
-     END
+     REDUCED MOTION
      ========================================================== */
+
+  if (
+    reduced &&
+    mascotDevice
+  ) {
+
+    mascotDevice.style.transform =
+      "translateX(-50%) " +
+      "scale(var(--mascot-scale,1))";
+
+  }
+
+
+  /* ==========================================================
+     MASCOT KEYBOARD ACCESSIBILITY
+     ========================================================== */
+
+  mascot?.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key !== "Enter" &&
+        event.key !== " "
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+
+      mascotPanel?.hidden
+        ? openMascotPanel()
+        : closeMascotPanel();
+
+    }
+  );
+
 
 })();
