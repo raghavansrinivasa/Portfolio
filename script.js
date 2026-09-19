@@ -892,11 +892,10 @@
   const mascotChoices = {
 
     body: [
-      "telephone",
-      "computer",
-      "pager",
-      "keyboard",
-      "mouse"
+      "retro-mouse",
+      "retro-keyboard",
+      "classic-macintosh",
+      "playstation-controller"
     ],
 
     sensor: [
@@ -922,7 +921,7 @@
 
   const mascotDefaults = {
 
-    body: "telephone",
+    body: "retro-mouse",
 
     sensor: "dot",
 
@@ -1280,9 +1279,119 @@
   }
 
 
+
+  /* ==========================================================
+     CLEAR LEGACY DECORATIONS FOR REALISTIC DANGLES
+     ========================================================== */
+
+  function clearMascotDecorations() {
+
+    /*
+     * Realistic SVG dangles are self-contained assets.
+     * Any decorative layer belonging to the old mascot system
+     * should therefore be empty while one is active.
+     */
+
+    const possibleDecorationSelectors = [
+      "#mascotDecorations",
+      "#mascotDecoration",
+      ".mascot-decorations",
+      ".mascot-decoration",
+      "[data-mascot-decoration]"
+    ];
+
+    possibleDecorationSelectors.forEach(selector => {
+
+      document
+        .querySelectorAll(selector)
+        .forEach(element => {
+
+          element.innerHTML = "";
+
+          element
+            .querySelectorAll("*")
+            .forEach(child => child.remove());
+
+        });
+
+    });
+
+  }
+
+
   /* ==========================================================
      RENDER MASCOT DEVICE
      ========================================================== */
+
+  /*
+   * REALISTIC DANGLE DEVICES
+   *
+   * These are external SVG assets.
+   * Existing five mascots continue using the original renderer.
+   */
+
+  const realisticMascotLabels = {
+
+    "retro-mouse":
+      "RETRO MOUSE",
+
+    "retro-keyboard":
+      "RETRO KEYBOARD",
+
+    "classic-macintosh":
+      "CLASSIC MACINTOSH",
+
+    "playstation-controller":
+      "PLAYSTATION CONTROLLER"
+
+  };
+
+
+  const realisticMascotAssets = {
+    "retro-mouse":
+      "assets/mascot-dangles/retro-mouse.svg",
+
+    "retro-keyboard":
+      "assets/mascot-dangles/retro-keyboard.svg",
+
+    "classic-macintosh":
+      "assets/mascot-dangles/classic-macintosh.svg",
+
+    "playstation-controller":
+      "assets/mascot-dangles/playstation-controller.svg"
+  };
+
+
+  function renderRealisticMascot(device) {
+
+    const src =
+      realisticMascotAssets[device];
+
+    if (!src || !mascotDeviceSvg) {
+      return false;
+    }
+
+    /*
+     * The current mascotDeviceSvg is an inline SVG.
+     * Preserve it as the visual host and use an image inside it.
+     */
+    mascotDeviceSvg.innerHTML = `
+      <image
+        href="${src}"
+        x="0"
+        y="0"
+        width="220"
+        height="150"
+        preserveAspectRatio="xMidYMid meet"
+      ></image>
+    `;
+
+    mascotDeviceSvg.style.color =
+      "var(--accent)";
+
+    return true;
+  }
+
 
   function updateMascotDevice() {
 
@@ -1359,23 +1468,73 @@
       accessory;
 
 
-    mascotDeviceSvg.innerHTML =
-      mascotDevices[body].svg;
+    /*
+     * REALISTIC DANGLES
+     *
+     * Use the external SVG asset renderer for the new
+     * realistic mascots. Existing mascots continue using
+     * the original inline SVG renderer.
+     */
 
+    if (realisticMascotAssets[body]) {
 
-    mascotDeviceSvg.style.color =
-      "var(--accent)";
+      renderRealisticMascot(body);
 
+    } else {
 
-    if (mascotDeviceName) {
+      mascotDeviceSvg.innerHTML =
+        mascotDevices[body].svg;
 
-      mascotDeviceName.textContent =
-        mascotDevices[body].label;
+      mascotDeviceSvg.style.color =
+        "var(--accent)";
 
     }
 
 
-    renderMascotDecorations();
+    if (mascotDeviceName) {
+
+      if (realisticMascotAssets[body]) {
+
+        const realisticLabels = {
+          "retro-mouse": "RETRO MOUSE",
+          "retro-keyboard": "RETRO KEYBOARD",
+          "classic-macintosh": "CLASSIC MACINTOSH",
+          "playstation-controller": "PLAYSTATION CONTROLLER"
+        };
+
+        mascotDeviceName.textContent =
+          realisticLabels[body] ||
+          body.toUpperCase();
+
+      } else {
+
+        mascotDeviceName.textContent =
+          mascotDevices[body].label;
+
+      }
+
+    }
+
+
+    /*
+     * REALISTIC DANGLES
+     *
+     * The external SVG asset is already a complete visual.
+     * Do NOT add the legacy sensor / mood / accessory
+     * decorations around realistic devices.
+     */
+
+    if (
+      realisticMascotAssets[body]
+    ) {
+
+      clearMascotDecorations();
+
+    } else {
+
+      renderMascotDecorations();
+
+    }
 
   }
 
@@ -1756,6 +1915,96 @@
 
     }
   );
+
+
+
+  /* ==========================================================
+     REALISTIC MASCOT UI CLEANUP
+     ========================================================== */
+
+  function removeLegacyMascotControls() {
+
+    if (!mascotPanel) {
+      return;
+    }
+
+    /*
+     * Remove the complete control row containing each
+     * legacy category, rather than just hiding buttons.
+     */
+
+    const legacyAttributes = [
+      "data-mascot-sensor",
+      "data-mascot-mood",
+      "data-mascot-accessory"
+    ];
+
+    legacyAttributes.forEach(attribute => {
+
+      mascotPanel
+        .querySelectorAll(`[${attribute}]`)
+        .forEach(option => {
+
+          let current = option;
+          let removed = false;
+
+          /*
+           * Walk upward until we find a compact control row.
+           * This accommodates the existing HTML without
+           * depending on one exact class name.
+           */
+
+          for (let i = 0; i < 5 && current.parentElement; i++) {
+
+            current = current.parentElement;
+
+            const text =
+              current.textContent
+                .replace(/\s+/g, " ")
+                .trim()
+                .toUpperCase();
+
+            if (
+              text.startsWith("SENSOR") ||
+              text.startsWith("MOOD") ||
+              text.startsWith("ACCESSORY")
+            ) {
+
+              current.remove();
+              removed = true;
+              break;
+
+            }
+
+          }
+
+          /*
+           * Fallback: remove the option itself.
+           * This prevents old controls from remaining visible
+           * if the markup uses an unexpected structure.
+           */
+
+          if (!removed && option.isConnected) {
+            option.remove();
+          }
+
+        });
+
+    });
+
+  }
+
+
+  /*
+   * Run once immediately and once after the panel has
+   * completed its initial DOM setup.
+   */
+
+  removeLegacyMascotControls();
+
+  requestAnimationFrame(() => {
+    removeLegacyMascotControls();
+  });
 
 
   /* ==========================================================
