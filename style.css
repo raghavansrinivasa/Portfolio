@@ -4979,3 +4979,162 @@ html[data-theme="poster"] ::selection{
 
   color:var(--accent-contrast);
 }
+
+
+/* ============================================================
+   REALISTIC MASCOT DANGLES
+   ============================================================ */
+
+.mascot-option-realistic {
+  display:flex !important;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  padding:4px !important;
+}
+
+.mascot-option-realistic img {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  pointer-events:none;
+  user-select:none;
+}
+
+
+/* Individual proportions */
+
+.mascot-option-realistic[data-mascot-body="retro-mouse"] img {
+  transform:scale(.82);
+}
+
+.mascot-option-realistic[data-mascot-body="retro-keyboard"] img {
+  transform:scale(.9);
+}
+
+.mascot-option-realistic[data-mascot-body="classic-macintosh"] img {
+  transform:scale(.82);
+}
+
+.mascot-option-realistic[data-mascot-body="playstation-controller"] img {
+  transform:scale(.88);
+}
+
+
+/*
+ * The realistic dangle artwork itself should not interfere
+ * with dragging the mascot.
+ */
+
+#mascotDeviceSvg image {
+  pointer-events:none;
+}
+
+
+
+/* ============================================================
+   REALISTIC MASCOT CONTROL PANEL
+   Isolated enhancement — existing system preserved.
+   ============================================================ */
+
+.mascot-panel {
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18, 24, 28, .97),
+      rgba(10, 14, 17, .97)
+    );
+
+  border: 1px solid var(--line-strong);
+
+  box-shadow:
+    0 22px 60px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.025);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+}
+
+
+.mascot-panel
+[data-mascot-body] {
+
+  transition:
+    border-color .2s ease,
+    background .2s ease,
+    transform .2s ease,
+    box-shadow .2s ease;
+
+}
+
+
+.mascot-panel
+[data-mascot-body]:hover {
+
+  transform: translateY(-1px);
+
+  border-color:
+    var(--accent);
+
+}
+
+
+.mascot-panel
+[data-mascot-body].is-selected {
+
+  border-color:
+    var(--accent);
+
+  background:
+    var(--accent-soft);
+
+  box-shadow:
+    inset 0 0 0 1px var(--accent-soft),
+    0 0 18px var(--accent-soft);
+
+}
+
+
+/* Realistic device thumbnails */
+
+.mascot-panel
+[data-mascot-body]
+img {
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 8px 10px rgba(0,0,0,.28)
+    );
+
+}
+
+
+/* Keep the control area compact and technical */
+
+.mascot-panel
+.mascot-options {
+
+  gap: 8px;
+
+}
+
+
+/* Remove visual remnants if any legacy controls
+   survive the JS cleanup. */
+
+.mascot-panel
+[data-mascot-sensor],
+.mascot-panel
+[data-mascot-mood],
+.mascot-panel
+[data-mascot-accessory] {
+
+  display: none !important;
+
+}
+
