@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 420">
+<defs>
+ <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5f5f1"/><stop offset=".48" stop-color="#c9cbc8"/><stop offset="1" stop-color="#777b79"/></linearGradient>
+ <linearGradient id="side" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9b9f9d"/><stop offset="1" stop-color="#505452"/></linearGradient>
+ <linearGradient id="wheel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4c514f"/><stop offset="1" stop-color="#171918"/></linearGradient>
+ <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="16" stdDeviation="14" flood-color="#000" flood-opacity=".42"/></filter>
+</defs>
+<path d="M160 18 C151 18 144 20 137 23" stroke="#9a8062" stroke-width="4" fill="none"/>
+<path d="M160 20 V76" stroke="#b29a78" stroke-width="3"/>
+<g filter="url(#shadow)">
+ <path d="M160 72 C91 72 48 118 48 193 v72 c0 77 46 126 112 126s112-49 112-126v-72C272 118 229 72 160 72Z" fill="url(#body)" stroke="#555957" stroke-width="5"/>
+ <path d="M160 76 V216" stroke="#777b79" stroke-width="4"/>
+ <path d="M52 202 C76 190 111 184 160 184s84 6 108 18v62c0 75-43 121-108 121S52 339 52 264Z" fill="url(#side)" opacity=".62"/>
+ <path d="M160 77 C141 82 126 103 126 129v91h68v-91c0-26-15-47-34-52Z" fill="#e4e5e1" opacity=".9"/>
+ <rect x="143" y="108" width="34" height="59" rx="15" fill="url(#wheel)" stroke="#2c302e" stroke-width="3"/>
+ <path d="M160 116v43" stroke="#818683" stroke-width="3" stroke-dasharray="5 7"/>
+ <path d="M70 214 C84 316 112 363 160 375" fill="none" stroke="#fff" stroke-opacity=".32" stroke-width="8" stroke-linecap="round"/>
+ <path d="M95 88 C73 111 62 145 62 185" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="7" stroke-linecap="round"/>
+</g>
+</svg>
